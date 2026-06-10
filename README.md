@@ -1,6 +1,6 @@
 # Home Energy Monitor
 
-**A custom PCB that measures real-time household power consumption — Watts, apparent power (VA), and power factor — and streams live data to a WiFi dashboard.**
+**A custom PCB that measures real-time household power consumption (Watts, apparent power (VA), and power factor) and streams live data to a OLED screen.**
 
 ![Status](https://img.shields.io/badge/status-in%20progress-yellow)
 ![License](https://img.shields.io/badge/license-MIT-blue)
