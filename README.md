@@ -6,7 +6,7 @@
 ![License](https://img.shields.io/badge/license-MIT-blue)
 ![KiCad](https://img.shields.io/badge/PCB-KiCad-blue)
 ![Platform](https://img.shields.io/badge/platform-ESP32-green)
-![Platform](https://img.shields.io/badge/platform-Autodesk-green)
+![Platform](https://img.shields.io/badge/CAD-Autodesk-red)
 
 ---
 
