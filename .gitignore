@@ -1,0 +1,26 @@
+# KiCad
+*.bak
+*.bck
+*.kicad_prl
+*-backups/
+fp-info-cache
+_autosave-*
+
+# Arduino / firmware
+build/
+.pio/
+*.elf
+*.bin
+*.hex
+
+# FreeCAD
+*.FCBak
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Misc
+*.log
+*.tmp
