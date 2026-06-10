@@ -11,11 +11,9 @@
 
 ## Why I Built This
 
-In February 2021, over 4.5 million Texas homes lost power during the ERCOT grid failure. I was one of them. Every hotel was booked as families scrambled for heat — it was one of the hardest winters I can remember. I wanted to understand how it actually happened.
+In February 2021, over 4.5 million Texas homes lost power in freezing temperatures during a power grid failure. I was one of them, the winter was hard with all hotels being booked as people scrambled to get heat. It was a very hard winter with our apartment getting to around 60 degrees Fahrenheit. I wanted to understand why the grid failure happened and came to the conclusion, The problem was that grid operators had almost no real-time view into household consumption of power. They didn't have the data to see the demand of power was changing minute by minute as more people in homes turned on their heaters to warm their homes. I want to understand how power is measured, how the grid sees demand so I will try to build a custom PCB that clips non-invasive current transformer sensors around wires and measure real-time power usage I would like it to measure Watts. Apparent power (VA) and Power factor.
 
-The core problem wasn't just frozen generators. Grid operators had almost no real-time view into household power consumption. They couldn't see how demand was shifting minute by minute as millions of people cranked their heaters at the same time. They were managing a statewide crisis without the data to make precise decisions.
 
-I want to build that data layer — starting at the household level. This project is my attempt to understand how power is actually measured at the circuit level, and to build something real around that knowledge.
 
 ---
 
