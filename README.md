@@ -19,14 +19,14 @@ In February 2021, over 4.5 million Texas homes lost power in freezing temperatur
 
 ## What It Does
 
-Non-invasive current transformer (CT) sensors clip around household wires inside a breaker box — no contact with live wiring. The custom PCB conditions the signal from the sensors and feeds it to an ESP32 microcontroller, which computes:
+Non-invasive current transformer (CT) sensors clip around household wires inside a breaker box(does not touch any live wires). The custom PCB conditions the signal from the sensors and feeds it to an ESP32 microcontroller, which measures:
 
-- **Real Power (Watts)** — actual energy consumed
-- **Apparent Power (VA)** — total load on the circuit
-- **Power Factor** — how efficiently the home is drawing power
-- **Cumulative kWh** — running energy usage over time
+- **Real Power (Watts)** 
+- **Apparent Power (VA)**
+- **Power Factor** 
+- **Cumulative kWh** 
 
-A live dashboard is served over WiFi and accessible from any browser on the network. A small OLED on the device shows readings without needing a phone.
+A live dashboard is served over WiFi and accessible from any browser on the network. A small OLED on the device shows readings which i plan on adding into my kitchen 
 
 ---
 
