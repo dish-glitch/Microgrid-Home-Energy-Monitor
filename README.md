@@ -10,6 +10,13 @@
 
 ---
 
+## Schematic Preview
+
+![Schematic Overview](docs/photos/image-1781241350544.png)
+![Schematic Detail](docs/photos/image-1781241379972.png)
+
+---
+
 ## Why I Built This
 
 In February 2021, over 4.5 million Texas homes lost power in freezing temperatures during a power grid failure. I was one of them, the winter was hard with all hotels being booked as people scrambled to get heat. It was a very hard winter with our apartment getting to around 60 degrees Fahrenheit. I wanted to understand why the grid failure happened and came to the conclusion, The problem was that grid operators had almost no real-time view into household consumption of power. They didn't have the data to see the demand of power was changing minute by minute as more people in homes turned on their heaters to warm their homes. I want to understand how power is measured, how the grid sees demand so I will try to build a custom PCB that clips non-invasive current transformer sensors around wires and measure real-time power usage I would like it to measure Watts. Apparent power (VA) and Power factor.
@@ -81,7 +88,8 @@ home-energy-monitor/
 |---|---|
 | June 10, 2026 | Project started. Repository initialized. |
 | June 11, 2026 | KiCad schematic started — analog front-end both CT channels complete |
-| — | KiCad schematic complete |
+| June 12, 2026 | KiCad schematic complete — ERC passes clean, all components wired |
+| — | PCB layout complete, Gerbers exported |
 | — | PCB layout complete, Gerbers exported |
 | — | PCBs ordered from JLCPCB |
 | — | Enclosure designed and printed |
@@ -93,7 +101,7 @@ home-energy-monitor/
 
 ## Status
 
-- [ ] KiCad schematic
+- [x] KiCad schematic
 - [ ] PCB layout
 - [ ] PCB fabrication (JLCPCB)
 - [ ] 3D enclosure design
