@@ -50,7 +50,7 @@ The ESP32 samples the clean signal at high frequency and runs RMS math in firmwa
 | Microcontroller | ESP32-WROOM-32 module | 1 | ~$5 |
 | Current sensor | SCT-013-000 (100A) | 2 | ~$7 ea |
 | Op-amp | MCP6002 | 1 | ~$0.50 |
-| Burden resistor | 10Ω 1% | 2 | ~$0.10 ea |
+| Burden resistor | 33Ω 1% | 2 | ~$0.10 ea |
 | Bias resistors | 10kΩ | 4 | ~$0.05 ea |
 | Filter capacitors | 10µF + 100nF | 4 | ~$0.20 |
 | Audio jack | 3.5mm stereo panel mount | 2 | ~$0.50 ea |
@@ -79,7 +79,8 @@ home-energy-monitor/
 
 | Date | Milestone |
 |---|---|
-| June 2026 | Project started. Repository initialized. |
+| June 10, 2026 | Project started. Repository initialized. |
+| June 11, 2026 | KiCad schematic started — analog front-end both CT channels complete |
 | — | KiCad schematic complete |
 | — | PCB layout complete, Gerbers exported |
 | — | PCBs ordered from JLCPCB |
