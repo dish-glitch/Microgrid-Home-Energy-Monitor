@@ -88,7 +88,7 @@ home-energy-monitor/
 |---|---|
 | June 10, 2026 | Project started. Repository initialized. |
 | June 11, 2026 | KiCad schematic started — analog front-end both CT channels complete |
-| June 12, 2026 | KiCad schematic complete — ERC passes clean, all components wired |
+| June 13, 2026 | KiCad schematic complete — ERC passes clean, all components wired |
 | — | PCB layout complete, Gerbers exported |
 | — | PCB layout complete, Gerbers exported |
 | — | PCBs ordered from JLCPCB |
