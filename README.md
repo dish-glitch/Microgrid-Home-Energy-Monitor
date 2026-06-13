@@ -14,6 +14,7 @@
 
 ![Schematic Overview](docs/photos/image-1781241350544.png)
 ![Schematic Detail](docs/photos/image-1781241379972.png)
+<img width="634" height="476" alt="image" src="https://github.com/user-attachments/assets/2f8c8e56-fbea-4777-b9e2-88b52e13e491" />
 
 ---
 
