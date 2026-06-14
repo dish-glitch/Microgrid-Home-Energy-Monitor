@@ -1,19 +1,122 @@
 # Hardware
 
-KiCad schematic and PCB layout files for the Home Energy Monitor.
+Custom 2-layer PCB designed in KiCad 9. Measures real-time household power consumption using non-invasive current transformer sensors.
 
-## Contents (added as project progresses)
+---
 
-- `energy-monitor.kicad_pro` — KiCad project file
-- `energy-monitor.kicad_sch` — Schematic
-- `energy-monitor.kicad_pcb` — PCB layout
-- `gerbers/` — Fabrication files for JLCPCB
+## PCB Specifications
 
-## Design Notes
+| Spec | Value |
+|---|---|
+| Layers | 2 (F.Cu / B.Cu) |
+| Board dimensions | ~130mm × 75mm |
+| Min trace width | 0.2mm signal / 0.4mm power |
+| Min clearance | 0.2mm |
+| Copper pour | GND flood fill on F.Cu |
+| Via drill | 0.3mm min |
+| Surface finish | HASL (lead-free) |
+| Fabrication | JLCPCB |
 
-- 2-layer PCB
-- Analog front-end: burden resistor + op-amp mid-rail bias + RC low-pass filter per channel
-- Two CT sensor input channels (3.5mm jacks)
-- ESP32-WROOM-32 module
-- SSD1306 OLED via I2C
-- USB-C power input
+---
+
+## Design Overview
+
+### Power Path
+USB-C (5V VBUS) → AMS1117-3.3 linear regulator → 3.3V rail → ESP32 + all peripherals
+
+CC1 and CC2 resistors (5.1kΩ to GND) identify the board as a USB device to the host charger, enabling 5V/500mA delivery per USB-C spec.
+
+### CT Sensor Signal Conditioning (per channel)
+Each channel processes the AC output of an SCT-013-000 current transformer:
+
+```
+SCT-013 → 33Ω burden resistor → 10µF coupling cap → MCP6002 op-amp buffer → ESP32 ADC
+                                    ↑
+                          10kΩ/10kΩ bias divider (1.65V midpoint)
+```
+
+1. **Burden resistor (33Ω):** Converts CT current output to a measurable voltage. Value calculated for 100A full-scale → 1.65V peak using V = I_secondary × R_burden (SCT-013-000 ratio: 100A:50mA).
+2. **Bias divider (2× 10kΩ):** Creates a 1.65V DC midpoint so the AC signal swings around 3.3V/2, keeping it within the ESP32's 0–3.3V ADC input range.
+3. **Coupling capacitor (10µF):** Blocks DC from the burden resistor; passes the 60Hz AC signal.
+4. **MCP6002 buffer:** Unity-gain op-amp buffer presents high impedance to the bias divider, preventing load-induced midpoint drift.
+
+### Voltage Sensing
+ZMPT101B voltage transformer connects to J6. Output feeds SENSOR_VP (GPIO36) — an input-only ADC pin with no internal pull resistors, chosen to minimize noise on the analog signal.
+
+### I2C Bus
+SDA (GPIO21) and SCL (GPIO22) pulled up to 3.3V via 4.7kΩ resistors. Pull-up value chosen for standard-mode I2C (100 kHz) with expected bus capacitance under 50pF.
+
+### ESP32 Boot Circuit
+- EN pulled high via 10kΩ (R7) + 100nF to GND for clean power-on reset
+- GPIO0 pulled high via 10kΩ (R10); SW2 pulls GPIO0 low for bootloader entry
+- SW1 pulls EN low for hard reset
+
+---
+
+## Schematic
+
+See [`Microgrid-Home-Energy-Monitor.kicad_sch`](Microgrid-Home-Energy-Monitor.kicad_sch)
+
+![Schematic](../docs/photos/image-1781241350544.png)
+
+---
+
+## PCB Layout
+
+See [`Microgrid-Home-Energy-Monitor.kicad_pcb`](Microgrid-Home-Energy-Monitor.kicad_pcb)
+
+Key layout decisions:
+- Analog front-end (J1, J2, U2, bias resistors) grouped bottom-right, away from ESP32 WiFi antenna
+- ESP32 antenna overhangs the keepout zone — no copper pour under antenna area
+- AMS1117 decoupling caps (C3–C6) placed within 2mm of regulator pins
+- ESP32 VDD decoupling (C7, C8) placed directly below VDD pin
+- USB-C connector (J4) edge-mounted on right wall for direct cable access
+- Ground pour floods entire F.Cu layer
+
+---
+
+## Bill of Materials
+
+| Ref | Component | Value | Package | MPN | Supplier |
+|---|---|---|---|---|---|
+| U1 | ESP32-WROOM-32 | — | Module | ESP32-WROOM-32E-N4 | Mouser 356-ESP32WROOM32EN4 |
+| U2 | MCP6002 Op-Amp | — | DIP-8 | MCP6002-I/P | Digikey MCP6002-I/P-ND |
+| U3 | AMS1117-3.3 | 3.3V LDO | SOT-223 | AMS1117-3.3 | Digikey 1665-1016-1-ND |
+| J1, J2 | CT Sensor Input | 3.5mm jack | SMD | SJ-3523-SMT | Digikey CP-3523SJCT-ND |
+| J3 | OLED Connector | 4-pin | 2.54mm header | — | generic |
+| J4 | USB-C Receptacle | USB 2.0 | SMD 16P | GCT USB4085-GF-A | Digikey 2073-USB4085-GF-ACT-ND |
+| J5 | Programming Header | 6-pin | 2.54mm header | — | generic |
+| J6 | ZMPT101B Connector | 3-pin | 2.54mm header | — | generic |
+| R1, R2 | Burden Resistor | 33Ω 1% | 0603 | — | generic |
+| R3–R6 | Bias Resistor | 10kΩ | 0603 | — | generic |
+| R7 | EN Pull-up | 10kΩ | 0603 | — | generic |
+| R8, R9 | I2C Pull-up | 4.7kΩ | 0603 | — | generic |
+| R10 | GPIO0 Pull-up | 10kΩ | 0603 | — | generic |
+| R11, R12 | CC Pull-down | 5.1kΩ | 0603 | — | generic |
+| R13, R14 | LED Current Limit | 150Ω | 0603 | — | generic |
+| C1, C2 | Coupling Cap | 10µF | 0805 | — | generic |
+| C3, C6 | LDO Bulk Cap | 10µF | 0805 | — | generic |
+| C4, C5 | LDO Bypass Cap | 100nF | 0603 | — | generic |
+| C7 | ESP32 Bypass | 100nF | 0603 | — | generic |
+| C8 | ESP32 Bulk | 10µF | 0805 | — | generic |
+| C9 | EN Filter Cap | 100nF | 0603 | — | generic |
+| D1 | Power LED | Red | 5mm THT | — | generic |
+| D2 | Status LED | Green | 5mm THT | — | generic |
+| SW1 | Reset Button | — | 6mm THT | — | generic |
+| SW2 | Boot Button | — | 6mm THT | — | generic |
+| CT1, CT2 | CT Sensor | SCT-013-000 | Clamp | SCT-013-000 | Amazon/AliExpress |
+
+---
+
+## Fabrication Files
+
+Gerber files for JLCPCB are in [`gerbers/`](gerbers/) — generated after final DRC pass.
+
+JLCPCB order settings:
+- Layers: 2
+- Dimensions: per gerber
+- PCB Qty: 5
+- PCB Color: Black
+- Surface Finish: HASL(lead-free)
+- Copper Weight: 1oz
+- All other settings: default

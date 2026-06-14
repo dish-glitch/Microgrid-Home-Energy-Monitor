@@ -1,0 +1,41 @@
+Reference,Component,Value,Package,MPN,Qty,Est Unit Cost (USD),Supplier
+U1,ESP32-WROOM-32,,Module,ESP32-WROOM-32E-N4,1,$4.00,Mouser
+U2,MCP6002 Op-Amp,,DIP-8,MCP6002-I/P,1,$0.50,Digikey
+U3,AMS1117-3.3,3.3V LDO,SOT-223,AMS1117-3.3,1,$0.35,Digikey
+J1,CT Sensor Jack,3.5mm stereo,SMD,SJ-3523-SMT,1,$0.60,Digikey
+J2,CT Sensor Jack,3.5mm stereo,SMD,SJ-3523-SMT,1,$0.60,Digikey
+J3,OLED Connector,4-pin 2.54mm,THT header,,1,$0.10,generic
+J4,USB-C Receptacle,USB 2.0 16P,SMD,GCT USB4085-GF-A,1,$0.85,Digikey
+J5,Programming Header,6-pin 2.54mm,THT header,,1,$0.10,generic
+J6,ZMPT101B Connector,3-pin 2.54mm,THT header,,1,$0.10,generic
+R1,Burden Resistor,33Ω 1%,0603,,1,$0.05,generic
+R2,Burden Resistor,33Ω 1%,0603,,1,$0.05,generic
+R3,Bias Resistor,10kΩ,0603,,1,$0.02,generic
+R4,Bias Resistor,10kΩ,0603,,1,$0.02,generic
+R5,Bias Resistor,10kΩ,0603,,1,$0.02,generic
+R6,Bias Resistor,10kΩ,0603,,1,$0.02,generic
+R7,EN Pull-up,10kΩ,0603,,1,$0.02,generic
+R8,I2C Pull-up SDA,4.7kΩ,0603,,1,$0.02,generic
+R9,I2C Pull-up SCL,4.7kΩ,0603,,1,$0.02,generic
+R10,GPIO0 Pull-up,10kΩ,0603,,1,$0.02,generic
+R11,CC1 Pull-down,5.1kΩ,0603,,1,$0.02,generic
+R12,CC2 Pull-down,5.1kΩ,0603,,1,$0.02,generic
+R13,LED Resistor D1,150Ω,0603,,1,$0.02,generic
+R14,LED Resistor D2,150Ω,0603,,1,$0.02,generic
+C1,Coupling Cap CH1,10µF,0805,,1,$0.10,generic
+C2,Coupling Cap CH2,10µF,0805,,1,$0.10,generic
+C3,LDO Input Bulk,10µF,0805,,1,$0.10,generic
+C4,LDO Output Bypass,100nF,0603,,1,$0.05,generic
+C5,LDO Input Bypass,100nF,0603,,1,$0.05,generic
+C6,LDO Output Bulk,10µF,0805,,1,$0.10,generic
+C7,ESP32 VDD Bypass,100nF,0603,,1,$0.05,generic
+C8,ESP32 VDD Bulk,10µF,0805,,1,$0.10,generic
+C9,EN Filter Cap,100nF,0603,,1,$0.05,generic
+D1,Power LED,Red 5mm,THT,,1,$0.10,generic
+D2,Status LED,Green 5mm,THT,,1,$0.10,generic
+SW1,Reset Button,6mm,THT,,1,$0.15,generic
+SW2,Boot Button,6mm,THT,,1,$0.15,generic
+CT1,CT Sensor,SCT-013-000 100A,Clamp,SCT-013-000,1,$7.00,Amazon
+CT2,CT Sensor,SCT-013-000 100A,Clamp,SCT-013-000,1,$7.00,Amazon
+,,,,PCB Fabrication (JLCPCB 5x),,,$20.00,JLCPCB
+,,,,TOTAL,,,~$42.00,
