@@ -41,8 +41,7 @@ Non-invasive current transformer (CT) sensors clip around household wires inside
 - **Power Factor** 
 - **Cumulative kWh** 
 
-A live dashboard is served over WiFi and accessible from any browser on the network. A small OLED on the device shows readings which i plan on adding into my kitchen 
-
+A live dashboard is served over WiFi and accessible from any browser on the network. A small OLED on the device shows readings.
 ---
 
 ## How It Works (Technical)
