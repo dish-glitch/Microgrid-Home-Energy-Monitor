@@ -98,6 +98,7 @@ home-energy-monitor/
 | June 14, 2026 | PCB layout complete — all components placed, routed, ground plane poured, DRC clean |
 | June 14, 2026 | Gerbers exported and committed — ready for JLCPCB upload |
 | June 14, 2026 | Firmware written — RMS sampling, power math, OLED display, kWh accumulator. Verified on Wokwi simulator. |
+| June 15, 2026 | WiFi dashboard complete — ESP32 serves live readings over HTTP, JavaScript polls every second |
 | — | PCBs ordered from JLCPCB |
 | — | Enclosure designed and printed |
 | — | PCBs arrived, soldering complete |
@@ -124,7 +125,7 @@ Simulates dual CT sensor readings, RMS power math, serial output, and OLED displ
 - [x] Firmware — power factor calculation
 - [ ] PCB fabrication (JLCPCB)
 - [ ] 3D enclosure design
-- [ ] WiFi dashboard
+- [x] WiFi dashboard
 - [ ] Full system test
 
 ---
