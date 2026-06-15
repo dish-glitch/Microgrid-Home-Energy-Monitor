@@ -1,0 +1,23 @@
+%TF.GenerationSoftware,KiCad,Pcbnew,9.0.4*%
+%TF.CreationDate,2026-06-14T22:04:49-05:00*%
+%TF.ProjectId,Microgrid-Home-Energy-Monitor,4d696372-6f67-4726-9964-2d486f6d652d,rev?*%
+%TF.SameCoordinates,Original*%
+%TF.FileFunction,Profile,NP*%
+%FSLAX46Y46*%
+G04 Gerber Fmt 4.6, Leading zero omitted, Abs format (unit mm)*
+G04 Created by KiCad (PCBNEW 9.0.4) date 2026-06-14 22:04:49*
+%MOMM*%
+%LPD*%
+G01*
+G04 APERTURE LIST*
+%TA.AperFunction,Profile*%
+%ADD10C,0.050000*%
+%TD*%
+G04 APERTURE END LIST*
+D10*
+X58460000Y-46120000D02*
+X188610000Y-46120000D01*
+X188610000Y-118980000D01*
+X58460000Y-118980000D01*
+X58460000Y-46120000D01*
+M02*
