@@ -2,6 +2,10 @@
 #include <Wire.h>
 #include <Adafruit_GFX.h>
 #include <Adafruit_SSD1306.h>
+#include <WiFi.h>
+#include <WebServer.h>
+
+
 // ================================================
 // --- Define ---
 // ================================================
@@ -18,6 +22,11 @@
 #define OLED_HEIGHT 64
 #define OLED_ADDER 0x3C
 
+const char* WIFI_SSID = "WIFI NAME "; // change <------------------------------
+const char* WIFI_PASS = "WIFI PASSWORD"; // change <----------------------------
+
+WebServer server(80);
+
 Adafruit_SSD1306 display(OLED_WIDTH, OLED_HEIGHT, &Wire, -1);
 
 EnergyMonitor ct1;
@@ -26,6 +35,69 @@ EnergyMonitor ct2;
 float kwh1 = 0.0;//gets energy over time 
 float kwh2 = 0.0;//gets energy over time 
 unsigned long lastMillis = 0;  // counts up from 0 and does NOT go into the negatives (tracks time)
+
+
+
+// ================================================
+// --- HTML(web browser) ---
+// ================================================
+
+String getDataJSON() {
+  String json = "{";
+  json += "\"vrms\":"    + String(ct1.Vrms, 1)        + ",";
+  json += "\"watts1\":"  + String(ct1.realPower, 1)   + ",";
+  json += "\"watts2\":"  + String(ct1.Vrms * ct2.Irms, 1) + ",";
+  json += "\"pf\":"      + String(ct1.powerFactor, 2) + ",";
+  json += "\"kwh\":"     + String(kwh1 + kwh2, 4);
+  json += "}";
+  return json;
+}
+
+String getDashboardHTML() {
+  String html = R"rawhtml(
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Energy Monitor</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    body { font-family: sans-serif; background: #111; color: #eee; text-align: center; padding: 20px; }
+    h1 { color: #4fc3f7; }
+    .card { background: #1e1e1e; border-radius: 12px; padding: 20px; margin: 10px auto; max-width: 400px; }
+    .value { font-size: 2em; font-weight: bold; color: #4fc3f7; }
+    .label { font-size: 0.9em; color: #aaa; margin-top: 4px; }
+  </style>
+</head>
+<body>
+  <h1>Home Energy Monitor</h1>
+  <div class="card"><div class="value" id="vrms">--</div><div class="label">Voltage (V)</div></div>
+  <div class="card"><div class="value" id="watts1">--</div><div class="label">Channel 1 (W)</div></div>
+  <div class="card"><div class="value" id="watts2">--</div><div class="label">Channel 2 (W)</div></div>
+  <div class="card"><div class="value" id="pf">--</div><div class="label">Power Factor</div></div>
+  <div class="card"><div class="value" id="kwh">--</div><div class="label">Total (kWh)</div></div>
+  <script>
+    setInterval(() => {
+      fetch('/data')
+        .then(r => r.json())
+        .then(d => {
+          document.getElementById('vrms').innerText   = d.vrms   + ' V';
+          document.getElementById('watts1').innerText = d.watts1 + ' W';
+          document.getElementById('watts2').innerText = d.watts2 + ' W';
+          document.getElementById('pf').innerText     = d.pf;
+          document.getElementById('kwh').innerText    = d.kwh    + ' kWh';
+        });
+    }, 1000);
+  </script>
+</body>
+</html>
+)rawhtml";
+  return html;
+}
+
+
+
+
+
 // ================================================
 // --- set up ---
 // ================================================
@@ -56,11 +128,46 @@ void setup() {
   display.display();
   delay(1000);
 
+
+// ================================================
+// --- Wifi/server set up ---
+// ================================================
+  WiFi.begin(WIFI_SSID, WIFI_PASS);
+  Serial.print("connecting to wifi");
+  while (WiFi.status() != WL_CONNECTED)
+  {
+    delay(500);
+    Serial.print(".");
+  }
+
+  Serial.println();
+  Serial.print("connected to IP: ");
+  Serial.println(WiFi.localIP());
+
+  server.on("/", [](){ 
+    server.send(200, "text/html", getDashboardHTML()); 
+  });
+
+  server.on("/data", [](){
+    server.send(200, "application/json", getDataJSON());
+  });
+  server.begin();
+// ================================================
+// --- Time  ---
+// ================================================
+
   lastMillis = millis();
   Serial.println("Set up finished :D");
 }
-void loop() 
+
+
+// ================================================
+// --- Loop  ---
+// ================================================
+
+void loop()
 {
+  server.handleClient(); 
   ct1.calcVI(20,2000); 
   ct2.calcIrms(1480);
   float Vrms          = ct1.Vrms;             //extract Vrms into Variable
@@ -69,7 +176,7 @@ void loop()
   float watts1        = ct1.realPower;        //extract Real Power into variable
   float val1          = ct1.apparentPower;    //extract Apparent Power into variable
   float powerFactor1  = ct1.powerFactor;      //extract Power Factor into Variable
-  float watts2 = Vrms * Irms2;                // Approximation 
+  float watts2 = Vrms * Irms2;                // Approximatione
 
   unsigned long now = millis();
   float fullHours = (now - lastMillis) / 3600000.0;
