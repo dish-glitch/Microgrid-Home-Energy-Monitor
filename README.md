@@ -44,7 +44,7 @@ Non-invasive current transformer (CT) sensors clip around household wires inside
 A live dashboard is served over WiFi and accessible from any browser on the network. A small OLED on the device shows readings.
 ---
 
-## How It Works (Technical)
+## How It Works
 
 The SCT-013 current clamp outputs a small AC signal that mirrors the current in the wire it's clamped around. That signal has three problems before the ESP32 can read it:
 
