@@ -96,7 +96,9 @@ home-energy-monitor/
 | June 11, 2026 | KiCad schematic started — analog front-end both CT channels complete |
 | June 13, 2026 | KiCad schematic complete — ERC passes clean, all components wired |
 | June 14, 2026 | PCB layout complete — all components placed, routed, ground plane poured, DRC clean |
-| — | Gerbers exported and PCBs ordered from JLCPCB |
+| June 14, 2026 | Gerbers exported and committed — ready for JLCPCB upload |
+| June 14, 2026 | Firmware written — RMS sampling, power math, OLED display, kWh accumulator. Verified on Wokwi simulator. |
+| — | PCBs ordered from JLCPCB |
 | — | Enclosure designed and printed |
 | — | PCBs arrived, soldering complete |
 | — | Firmware complete, first power readings |
@@ -104,14 +106,24 @@ home-energy-monitor/
 
 ---
 
+## Simulation
+
+Test the firmware logic without hardware — runs in browser:
+
+[![Wokwi Simulation](https://img.shields.io/badge/Wokwi-Run%20Simulation-green?logo=data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCI+PHBhdGggZmlsbD0id2hpdGUiIGQ9Ik04IDV2MTRsMTEtN3oiLz48L3N2Zz4=)](https://wokwi.com/projects/466868484916087809)
+
+Simulates dual CT sensor readings, RMS power math, serial output, and OLED display on a virtual ESP32. CH1 uses hardcoded test values (120V, 5A, 550W, PF 0.92) to verify the signal chain and kWh accumulator logic.
+
+---
+
 ## Status
 
 - [x] KiCad schematic
 - [x] PCB layout
+- [x] Firmware — ADC sampling + RMS math
+- [x] Firmware — power factor calculation
 - [ ] PCB fabrication (JLCPCB)
 - [ ] 3D enclosure design
-- [ ] Firmware — ADC sampling + RMS math
-- [ ] Firmware — power factor calculation
 - [ ] WiFi dashboard
 - [ ] Full system test
 
