@@ -65,22 +65,27 @@ The ESP32 samples the clean signal at high frequency and runs RMS math in firmwa
 
 ## Hardware
 
-> Prices are what you actually pay per order (not per component). Amazon prices fluctuate — check links for current pricing.
+> Prices are what you actually pay per order, not per component. Amazon prices fluctuate — check links for current pricing. Order DigiKey items together to share one shipping fee (~$8 flat).
 
-| Component | Need | What to Buy | Pack Size | Est. Order Price | Link |
-|---|---|---|---|---|---|
-| ESP32-WROOM-32 module | 1 | ESP-WROOM-32D | 5-pack | ~$16 | [Amazon](https://www.amazon.com/ESP-WROOM-32D-ESP-32-Bluetooth-Module-ESP32-WROOM-32D/dp/B085BNHPW5) |
-| CT sensor SCT-013-000 | 2 | KOOBOOK 2-pack | 2-pack | ~$15 | [Amazon](https://www.amazon.com/KOOBOOK-SCT-013-000-Non-invasive-Current-Transformer/dp/B07S4G2Y27) |
-| Op-amp MCP6002 | 1 | Juried Engineering 1-pack | 1 | ~$4 | [Amazon](https://www.amazon.com/MICROCHIP-MCP6002-I-MCP6002-Operational-Amplifier/dp/B07GMWJ523) |
-| Voltage regulator AMS1117-3.3 | 1 | 10-pack SOT-223 | 10-pack | ~$6 | [Amazon](https://www.amazon.com/AMS1117-3-3-LM1117-SOT-223-Voltage-Regulator/dp/B00Y5EKAU2) |
-| Resistors (33Ω + 10kΩ) | 6 total | Plusivo assortment kit (covers both values + more) | 600pc / 30 values | ~$9 | [Amazon](https://www.amazon.com/Resistor-Assortment-Kit-Thermistor-Photoresistor/dp/B0792M83JH) |
-| Capacitors (10µF + 100nF) | 4 total | Multilayer ceramic kit (100nF–10µF range) | 200pc / 10 values | ~$8 | [Amazon](https://www.amazon.com/Multilayer-Ceramic-Capacitor-Assortment-100nF-10uF/dp/B06ZYRLXB6) |
-| 3.5mm audio jack | 2 | BLLNDX 2-pack | 2-pack | ~$6 | [Amazon](https://www.amazon.com/BLLNDX-Stereo-Female-Headphone-Connector/dp/B09B7JKSQ1) |
-| SSD1306 OLED 0.96" | 1 | Single unit | 1 | ~$7 | [Amazon](https://www.amazon.com/SSD1306-Display-128x64-Driver-Screen/dp/B0GRGLP6WW) |
-| USB-C breakout | 1 | MECCANIXITY 5-pack | 5-pack | ~$9 | [Amazon](https://www.amazon.com/MECCANIXITY-Breakout-Female-Connection-Connector/dp/B0CD7WG2WD) |
-| PCB fabrication | 1 run | JLCPCB (5 boards + shipping) | 5 boards | ~$20 | [JLCPCB](https://jlcpcb.com) |
-| Enclosure | 1 | 3D printed PETG-CF | — | $0 | filament on hand |
-| **Total** | | | | **~$100** | |
+| Component | Ref | Need | What to Buy | Pack | Est. Order Price | Where |
+|---|---|---|---|---|---|---|
+| ESP32-WROOM-32 module | U1 | 1 | ESP-WROOM-32D 5-pack | 5 | ~$16 | [Amazon](https://www.amazon.com/ESP-WROOM-32D-ESP-32-Bluetooth-Module-ESP32-WROOM-32D/dp/B085BNHPW5) |
+| CT sensor SCT-013-000 (100A) | J1, J2 sensors | 2 | KOOBOOK 2-pack | 2 | ~$15 | [Amazon](https://www.amazon.com/KOOBOOK-SCT-013-000-Non-invasive-Current-Transformer/dp/B07S4G2Y27) |
+| Op-amp MCP6002 DIP-8 | U2 | 1 | Juried Engineering 1-pack | 1 | ~$4 | [Amazon](https://www.amazon.com/MICROCHIP-MCP6002-I-MCP6002-Operational-Amplifier/dp/B07GMWJ523) |
+| Voltage regulator AMS1117-3.3 | U3 | 1 | 10-pack SOT-223 | 10 | ~$6 | [Amazon](https://www.amazon.com/AMS1117-3-3-LM1117-SOT-223-Voltage-Regulator/dp/B00Y5EKAU2) |
+| SMD resistors 0603 (33Ω, 10kΩ, 4.7kΩ, 5.1kΩ, 150Ω) | R1–R14 | 14 total | 0603 assortment kit — covers all 5 values | 660pc / 33 values | ~$9 | [Amazon](https://www.amazon.com/660pcs-0603-Resistors-Assortment-Values/dp/B0CH2XD7JY) |
+| SMD capacitors 0603+0805 (100nF, 10µF) | C1–C9 | 9 total | 0603/0805 assortment kit (10pF–22µF) | 960pc / 16 values | ~$10 | [Amazon](https://www.amazon.com/Capacitor-10pF-22uF-Multilayer-Capacitors-Assortment/dp/B094Z9V5KK) |
+| 3.5mm audio jack SMT (CUI SJ-3523-SMT) | J1, J2 | 2 | Order 2 individually | 2 | ~$5 | [DigiKey](https://www.digikey.com/en/products/detail/same-sky-formerly-cui-devices/SJ-3523-SMT-TR/281297) |
+| USB-C receptacle (GCT USB4085-GF-A) | J4 | 1 | Order 1 individually | 1 | ~$1 | [DigiKey](https://www.digikey.com/en/products/detail/gct/USB4085-GF-A/9859662) |
+| 3mm LED (red or green) | D1, D2 | 2 | 10-pack | 10 | ~$5 | [Amazon](https://www.amazon.com/3mm-Round-Top-Red-LED/dp/B017TR4XWW) |
+| Tactile button 6×6×4.3mm THT | SW1, SW2 | 2 | 10-pack | 10 | ~$5 | [Amazon](https://www.amazon.com/6x6x4-3mm-Momentary-Tactile-Button-Through/dp/B00EDJYK46) |
+| 2.54mm male pin headers (J3 4-pin, J5 6-pin, J6 3-pin) | J3, J5, J6 | 13 pins | 40-pin breakable strip (snap to length) | 10×40 strips | ~$6 | [Amazon](https://www.amazon.com/MCIGICM-Header-2-45mm-Arduino-Connector/dp/B07PKKY8BX) |
+| SSD1306 OLED 0.96" I2C | J3 display | 1 | Single unit | 1 | ~$7 | [Amazon](https://www.amazon.com/SSD1306-Display-128x64-Driver-Screen/dp/B0GRGLP6WW) |
+| CP2102 USB-to-UART programmer (to flash via J5) | — | 1 | HiLetgo CP2102 | 1 | ~$7 | [Amazon](https://www.amazon.com/HiLetgo-CP2102-Converter-Adapter-Downloader/dp/B00LODGRV8) |
+| PCB fabrication | — | 1 run | JLCPCB 5 boards + shipping | 5 boards | ~$20 | [JLCPCB](https://jlcpcb.com) |
+| Enclosure | — | 1 | 3D printed PETG-CF | — | $0 | filament on hand |
+| DigiKey shipping | — | — | Flat rate (order SJ-3523 + USB4085 together) | — | ~$8 | — |
+| **Total** | | | | | **~$124** | |
 
 ---
 
