@@ -65,20 +65,21 @@ The ESP32 samples the clean signal at high frequency and runs RMS math in firmwa
 
 ## Hardware
 
-| Component | Part | Qty | Est. Cost | Link |
-|---|---|---|---|---|
-| Microcontroller | ESP32-WROOM-32 module | 1 | ~$5 | [Amazon](https://www.amazon.com/ESP-WROOM-32D-ESP-32-Bluetooth-Module-ESP32-WROOM-32D/dp/B085BNHPW5) |
-| Current sensor | SCT-013-000 (100A) | 2 | ~$7 ea | [Amazon](https://www.amazon.com/YHDC-Transformer-SCT013-000-100A-50mA/dp/B01EFS7QUE) |
-| Op-amp | MCP6002 | 1 | ~$0.50 | [Amazon](https://www.amazon.com/MICROCHIP-MCP6002-I-MCP6002-Operational-Amplifier/dp/B06Y6BPF51) |
-| Burden resistor | 33Ω 1% | 2 | ~$0.10 ea | [Amazon](https://www.amazon.com/33-ohm-Metal-Resistors-Tolerance/dp/B07DHGJXMN) |
-| Bias resistors | 10kΩ | 4 | ~$0.05 ea | [Amazon](https://www.amazon.com/Resistor-Tolerance-Resistors-Limiting-Certificated/dp/B08QRJZ82J) |
-| Filter capacitors | 10µF + 100nF | 4 | ~$0.20 | [Amazon](https://www.amazon.com/ALLECIN-Electrolytic-Capacitor-Assortment-Kit/dp/B0C1VBXCQM) |
-| Audio jack | 3.5mm stereo panel mount | 2 | ~$0.50 ea | [Amazon](https://www.amazon.com/Lsgoodcare-Connector-Terminals-Nuts-3-5MM-Headphone/dp/B013AP77T8) |
-| Display | SSD1306 OLED 128x64 | 1 | ~$4 | [Amazon](https://www.amazon.com/Hosyond-Display-Self-Luminous-Compatible-Raspberry/dp/B09C5K91H7) |
-| USB connector | USB-C breakout | 1 | ~$0.50 | [Amazon](https://www.amazon.com/MECCANIXITY-Breakout-Female-Connection-Connector/dp/B0CD7WG2WD) |
-| PCB fabrication | JLCPCB (5 boards) | 1 | ~$20 | [JLCPCB](https://jlcpcb.com) |
-| Enclosure | 3D printed (PETG-CF) | 1 | ~$3 | filament on hand |
-| **Total** | | | **~$50** | |
+> Prices are what you actually pay per order (not per component). Amazon prices fluctuate — check links for current pricing.
+
+| Component | Need | What to Buy | Pack Size | Est. Order Price | Link |
+|---|---|---|---|---|---|
+| ESP32-WROOM-32 module | 1 | ESP-WROOM-32D | 5-pack | ~$16 | [Amazon](https://www.amazon.com/ESP-WROOM-32D-ESP-32-Bluetooth-Module-ESP32-WROOM-32D/dp/B085BNHPW5) |
+| CT sensor SCT-013-000 | 2 | KOOBOOK 2-pack | 2-pack | ~$15 | [Amazon](https://www.amazon.com/KOOBOOK-SCT-013-000-Non-invasive-Current-Transformer/dp/B07S4G2Y27) |
+| Op-amp MCP6002 | 1 | Juried Engineering 1-pack | 1 | ~$4 | [Amazon](https://www.amazon.com/MICROCHIP-MCP6002-I-MCP6002-Operational-Amplifier/dp/B07GMWJ523) |
+| Resistors (33Ω + 10kΩ) | 6 total | Plusivo assortment kit (covers both values + more) | 600pc / 30 values | ~$9 | [Amazon](https://www.amazon.com/Resistor-Assortment-Kit-Thermistor-Photoresistor/dp/B0792M83JH) |
+| Capacitors (10µF + 100nF) | 4 total | Multilayer ceramic kit (100nF–10µF range) | 200pc / 10 values | ~$8 | [Amazon](https://www.amazon.com/Multilayer-Ceramic-Capacitor-Assortment-100nF-10uF/dp/B06ZYRLXB6) |
+| 3.5mm audio jack | 2 | BLLNDX 2-pack | 2-pack | ~$6 | [Amazon](https://www.amazon.com/BLLNDX-Stereo-Female-Headphone-Connector/dp/B09B7JKSQ1) |
+| SSD1306 OLED 0.96" | 1 | Single unit | 1 | ~$7 | [Amazon](https://www.amazon.com/SSD1306-Display-128x64-Driver-Screen/dp/B0GRGLP6WW) |
+| USB-C breakout | 1 | MECCANIXITY 5-pack | 5-pack | ~$9 | [Amazon](https://www.amazon.com/MECCANIXITY-Breakout-Female-Connection-Connector/dp/B0CD7WG2WD) |
+| PCB fabrication | 1 run | JLCPCB (5 boards + shipping) | 5 boards | ~$20 | [JLCPCB](https://jlcpcb.com) |
+| Enclosure | 1 | 3D printed PETG-CF | — | $0 | filament on hand |
+| **Total** | | | | **~$94** | |
 
 ---
 
