@@ -77,7 +77,7 @@ The ESP32 samples the clean signal at high frequency and runs RMS math in firmwa
 | Display | SSD1306 OLED 128x64 | 1 | ~$4 |
 | USB connector | USB-C breakout | 1 | ~$0.50 |
 | PCB fabrication | JLCPCB (5 boards) | 1 | ~$20 |
-| Enclosure | 3D printed (PLA) | 1 | ~$3 |
+| Enclosure | 3D printed (PETG-CF) | 1 | ~$3 |
 | **Total** | | | **~$50** |
 
 ---
