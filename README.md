@@ -124,7 +124,7 @@ Simulates dual CT sensor readings, RMS power math, serial output, and OLED displ
 - [x] Firmware — ADC sampling + RMS math
 - [x] Firmware — power factor calculation
 - [ ] PCB fabrication (JLCPCB)
-- [ ] 3D enclosure design
+- [x] 3D enclosure design
 - [x] WiFi dashboard
 - [ ] Full system test
 
