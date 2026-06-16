@@ -65,20 +65,20 @@ The ESP32 samples the clean signal at high frequency and runs RMS math in firmwa
 
 ## Hardware
 
-| Component | Part | Qty | Est. Cost |
-|---|---|---|---|
-| Microcontroller | ESP32-WROOM-32 module | 1 | ~$5 |
-| Current sensor | SCT-013-000 (100A) | 2 | ~$7 ea |
-| Op-amp | MCP6002 | 1 | ~$0.50 |
-| Burden resistor | 33Ω 1% | 2 | ~$0.10 ea |
-| Bias resistors | 10kΩ | 4 | ~$0.05 ea |
-| Filter capacitors | 10µF + 100nF | 4 | ~$0.20 |
-| Audio jack | 3.5mm stereo panel mount | 2 | ~$0.50 ea |
-| Display | SSD1306 OLED 128x64 | 1 | ~$4 |
-| USB connector | USB-C breakout | 1 | ~$0.50 |
-| PCB fabrication | JLCPCB (5 boards) | 1 | ~$20 |
-| Enclosure | 3D printed (PETG-CF) | 1 | ~$3 |
-| **Total** | | | **~$50** |
+| Component | Part | Qty | Est. Cost | Link |
+|---|---|---|---|---|
+| Microcontroller | ESP32-WROOM-32 module | 1 | ~$5 | [Amazon](https://www.amazon.com/ESP-WROOM-32D-ESP-32-Bluetooth-Module-ESP32-WROOM-32D/dp/B085BNHPW5) |
+| Current sensor | SCT-013-000 (100A) | 2 | ~$7 ea | [Amazon](https://www.amazon.com/YHDC-Transformer-SCT013-000-100A-50mA/dp/B01EFS7QUE) |
+| Op-amp | MCP6002 | 1 | ~$0.50 | [Amazon](https://www.amazon.com/MICROCHIP-MCP6002-I-MCP6002-Operational-Amplifier/dp/B06Y6BPF51) |
+| Burden resistor | 33Ω 1% | 2 | ~$0.10 ea | [Amazon](https://www.amazon.com/33-ohm-Metal-Resistors-Tolerance/dp/B07DHGJXMN) |
+| Bias resistors | 10kΩ | 4 | ~$0.05 ea | [Amazon](https://www.amazon.com/Resistor-Tolerance-Resistors-Limiting-Certificated/dp/B08QRJZ82J) |
+| Filter capacitors | 10µF + 100nF | 4 | ~$0.20 | [Amazon](https://www.amazon.com/ALLECIN-Electrolytic-Capacitor-Assortment-Kit/dp/B0C1VBXCQM) |
+| Audio jack | 3.5mm stereo panel mount | 2 | ~$0.50 ea | [Amazon](https://www.amazon.com/Lsgoodcare-Connector-Terminals-Nuts-3-5MM-Headphone/dp/B013AP77T8) |
+| Display | SSD1306 OLED 128x64 | 1 | ~$4 | [Amazon](https://www.amazon.com/Hosyond-Display-Self-Luminous-Compatible-Raspberry/dp/B09C5K91H7) |
+| USB connector | USB-C breakout | 1 | ~$0.50 | [Amazon](https://www.amazon.com/MECCANIXITY-Breakout-Female-Connection-Connector/dp/B0CD7WG2WD) |
+| PCB fabrication | JLCPCB (5 boards) | 1 | ~$20 | [JLCPCB](https://jlcpcb.com) |
+| Enclosure | 3D printed (PETG-CF) | 1 | ~$3 | filament on hand |
+| **Total** | | | **~$50** | |
 
 ---
 
