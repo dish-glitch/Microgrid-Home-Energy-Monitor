@@ -72,6 +72,7 @@ The ESP32 samples the clean signal at high frequency and runs RMS math in firmwa
 | ESP32-WROOM-32 module | 1 | ESP-WROOM-32D | 5-pack | ~$16 | [Amazon](https://www.amazon.com/ESP-WROOM-32D-ESP-32-Bluetooth-Module-ESP32-WROOM-32D/dp/B085BNHPW5) |
 | CT sensor SCT-013-000 | 2 | KOOBOOK 2-pack | 2-pack | ~$15 | [Amazon](https://www.amazon.com/KOOBOOK-SCT-013-000-Non-invasive-Current-Transformer/dp/B07S4G2Y27) |
 | Op-amp MCP6002 | 1 | Juried Engineering 1-pack | 1 | ~$4 | [Amazon](https://www.amazon.com/MICROCHIP-MCP6002-I-MCP6002-Operational-Amplifier/dp/B07GMWJ523) |
+| Voltage regulator AMS1117-3.3 | 1 | 10-pack SOT-223 | 10-pack | ~$6 | [Amazon](https://www.amazon.com/AMS1117-3-3-LM1117-SOT-223-Voltage-Regulator/dp/B00Y5EKAU2) |
 | Resistors (33Ω + 10kΩ) | 6 total | Plusivo assortment kit (covers both values + more) | 600pc / 30 values | ~$9 | [Amazon](https://www.amazon.com/Resistor-Assortment-Kit-Thermistor-Photoresistor/dp/B0792M83JH) |
 | Capacitors (10µF + 100nF) | 4 total | Multilayer ceramic kit (100nF–10µF range) | 200pc / 10 values | ~$8 | [Amazon](https://www.amazon.com/Multilayer-Ceramic-Capacitor-Assortment-100nF-10uF/dp/B06ZYRLXB6) |
 | 3.5mm audio jack | 2 | BLLNDX 2-pack | 2-pack | ~$6 | [Amazon](https://www.amazon.com/BLLNDX-Stereo-Female-Headphone-Connector/dp/B09B7JKSQ1) |
@@ -79,7 +80,7 @@ The ESP32 samples the clean signal at high frequency and runs RMS math in firmwa
 | USB-C breakout | 1 | MECCANIXITY 5-pack | 5-pack | ~$9 | [Amazon](https://www.amazon.com/MECCANIXITY-Breakout-Female-Connection-Connector/dp/B0CD7WG2WD) |
 | PCB fabrication | 1 run | JLCPCB (5 boards + shipping) | 5 boards | ~$20 | [JLCPCB](https://jlcpcb.com) |
 | Enclosure | 1 | 3D printed PETG-CF | — | $0 | filament on hand |
-| **Total** | | | | **~$94** | |
+| **Total** | | | | **~$100** | |
 
 ---
 
