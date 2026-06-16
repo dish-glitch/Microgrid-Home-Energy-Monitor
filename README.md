@@ -24,6 +24,13 @@
 
 
 
+## Enclosure Preview
+
+![Enclosure render](docs/photos/image-1781640720901.png)
+![Enclosure top view](docs/photos/image-1781640738088.png)
+
+---
+
 ## Why I Built This
 
 In February 2021, over 4.5 million Texas homes lost power in freezing temperatures during a power grid failure. I was one of them, the winter was hard with all hotels being booked as people scrambled to get heat. It was a very hard winter with our apartment getting to around 60 degrees Fahrenheit. I wanted to understand why the grid failure happened and came to the conclusion, The problem was that grid operators had almost no real-time view into household consumption of power. They didn't have the data to see the demand of power was changing minute by minute as more people in homes turned on their heaters to warm their homes. I want to understand how power is measured, how the grid sees demand so I will try to build a custom PCB that clips non-invasive current transformer sensors around wires and measure real-time power usage I would like it to measure Watts. Apparent power (VA) and Power factor.
@@ -99,10 +106,11 @@ home-energy-monitor/
 | June 14, 2026 | Gerbers exported and committed — ready for JLCPCB upload |
 | June 14, 2026 | Firmware written — RMS sampling, power math, OLED display, kWh accumulator. Verified on Wokwi simulator. |
 | June 15, 2026 | WiFi dashboard complete — ESP32 serves live readings over HTTP, JavaScript polls every second |
+| June 16, 2026 | 3D enclosure designed by [@hummos430](https://github.com/hummos430) in Fusion 360 — files committed |
+| June 16, 2026 | Stardance funding submitted — S tier $150 |
 | — | PCBs ordered from JLCPCB |
-| — | Enclosure designed and printed |
 | — | PCBs arrived, soldering complete |
-| — | Firmware complete, first power readings |
+| — | Firmware calibrated, first real power readings |
 | — | Dashboard live, full system working |
 
 ---
