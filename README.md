@@ -12,14 +12,14 @@
 
 ## Schematic Preview
 
-![Schematic Overview](docs/photos/image-1781241350544.png)
+
 ![Schematic Detail](docs/photos/image-1781241379972.png)
 <img width="634" height="476" alt="image" src="https://github.com/user-attachments/assets/2f8c8e56-fbea-4777-b9e2-88b52e13e491" />
 
 ---
 
 ## PCB Preview
-<img width="790" height="535" alt="image" src="https://github.com/user-attachments/assets/817514d3-6d6b-4433-bdd6-ac3e1718bcd1" />
+
 <img width="1027" height="564" alt="image" src="https://github.com/user-attachments/assets/f797b869-352d-47de-808c-f22c5249dbf1" />
 
 
