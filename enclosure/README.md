@@ -81,3 +81,7 @@ The AMS1117-3.3 regulator dissipates approximately 0.5W at normal load (~300mA).
 | `HomecurrentMoniter_Top Plate HCM UPDATED.f3d` | Fusion 360 source — top lid |
 | `HomecurrentMoniter_BottomPlateHCM updated.stl` | Print file — bottom tray |
 | `HomecurrentMoniter_Top Plate HCM UPDATED.stl` | Print file — top lid |
+
+**Pictures**
+
+<img width="1129" height="676" alt="Screenshot 2026-06-15 163151" src="https://github.com/user-attachments/assets/75925e14-7fbb-44e5-b3f4-d2514e1974b1" />
