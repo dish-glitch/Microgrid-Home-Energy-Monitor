@@ -116,6 +116,7 @@ home-energy-monitor/
 | June 15, 2026 | WiFi dashboard complete — ESP32 serves live readings over HTTP, JavaScript polls every second |
 | June 16, 2026 | 3D enclosure designed by [@hummos430](https://github.com/hummos430) in Fusion 360 — files committed |
 | June 16, 2026 | Stardance funding submitted — S tier $150 |
+| July 3, 2026 | DRC audit fixes — solid B.Cu ground plane added, ESP32 thermal via drills fixed, USB-C clearance rule corrected. ERC + DRC verified 0 errors. Gerbers re-exported — board ready to order |
 | — | PCBs ordered from JLCPCB |
 | — | PCBs arrived, soldering complete |
 | — | Firmware calibrated, first real power readings |
@@ -135,12 +136,12 @@ Simulates dual CT sensor readings, RMS power math, serial output, and OLED displ
 
 ## Status
 
-- [x] KiCad schematic — ERC clean
-- [x] PCB layout
-- [ ] PCB pre-order DRC fixes — GND zone islands, ESP32 thermal via drill 0.2→0.3mm, USB-C pad clearance rule (see hardware README)
+- [x] KiCad schematic — ERC clean (0 errors)
+- [x] PCB layout — DRC clean (0 violations, 0 unconnected); B.Cu ground plane added
+- [x] Gerbers exported from the DRC-clean board — ready for JLCPCB upload
 - [x] Firmware — ADC sampling + RMS math
 - [x] Firmware — power factor calculation
-- [ ] PCB fabrication (JLCPCB) — after DRC fixes + Gerber re-export
+- [ ] PCB fabrication (JLCPCB)
 - [x] 3D enclosure design
 - [x] WiFi dashboard
 - [ ] Full system test

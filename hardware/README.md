@@ -11,8 +11,8 @@ Custom 2-layer PCB designed in KiCad 9. Measures real-time household power consu
 | Layers | 2 (F.Cu / B.Cu) |
 | Board dimensions | ~130mm × 75mm |
 | Min trace width | 0.2mm signal / 0.4mm power |
-| Min clearance | 0.2mm |
-| Copper pour | GND flood fill on F.Cu |
+| Min clearance | 0.15mm (accommodates the USB-C footprint's pad spacing; JLCPCB handles down to 0.127mm) |
+| Copper pour | GND flood on F.Cu + solid GND plane on B.Cu, joined by stitching vias |
 | Via drill | 0.3mm min |
 | Surface finish | HASL (lead-free) |
 | Fabrication | JLCPCB |
@@ -109,31 +109,21 @@ Key layout decisions:
 
 ---
 
-## ⚠️ Pre-Order Fixes Required (found in DRC audit, 2026-07-02)
+## Design Verification
 
-A fresh `kicad-cli pcb drc` run found errors that must be fixed **before ordering**:
+All fixes from the 2026-07-02 DRC audit are complete (verified with `kicad-cli`):
 
-1. **GND zone islands** — part of the F.Cu ground pour near (58.5, 46.1)mm is isolated
-   from the rest of GND (3 unconnected-items errors). Open the board, refill zones (`B`),
-   locate the island, and join it with a trace or stitching vias. An isolated GND island
-   can leave component ground pins floating — the board may not work at all.
-2. **ESP32 thermal via drills** — the 12 stitching vias in the ESP32 GND pad use 0.2mm
-   drills; the board minimum (and JLCPCB's standard 2-layer process) is 0.3mm. Edit the
-   vias to 0.3mm drill / 0.6mm diameter.
-3. **USB-C (J4) pad clearance** — the GCT USB4085 footprint has 0.15mm pad-to-pad gaps
-   but the Default netclass requires 0.2mm (19 errors). JLCPCB handles down to 0.127mm:
-   set Board Setup → Constraints → minimum clearance to 0.15mm (and the netclass to match).
-
-After fixing: re-run DRC, confirm 0 errors, and **re-export the Gerbers** — the committed
-set predates these fixes.
-
-ERC on the schematic is clean (0 errors, verified same audit).
+- **ERC: 0 errors.** **DRC: 0 violations, 0 unconnected items.**
+- GND split-pour islands eliminated by adding a solid B.Cu ground plane with stitching
+  vias — front pour fragments all tie to it, so pinch-offs can't strand a ground pin
+- ESP32 thermal vias enlarged to 0.3mm drill (JLCPCB 2-layer minimum)
+- Minimum clearance set to 0.15mm to fit the USB-C footprint's actual pad spacing
 
 ---
 
 ## Fabrication Files
 
-Gerber files for JLCPCB are in [`gerbers/`](gerbers/) — **stale, re-export after the DRC fixes above.**
+Gerber files for JLCPCB are in [`gerbers/`](gerbers/) — exported from the DRC-clean board, **ready to upload**.
 
 JLCPCB order settings:
 - Layers: 2
