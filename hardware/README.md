@@ -35,7 +35,7 @@ SCT-013 → 33Ω burden resistor → 10µF coupling cap → MCP6002 op-amp buffe
                           10kΩ/10kΩ bias divider (1.65V midpoint)
 ```
 
-1. **Burden resistor (33Ω):** Converts CT current output to a measurable voltage. Value calculated for 100A full-scale → 1.65V peak using V = I_secondary × R_burden (SCT-013-000 ratio: 100A:50mA).
+1. **Burden resistor (33Ω):** Converts CT current output to a measurable voltage via V = I_secondary × R_burden (SCT-013-000 ratio: 100A:50mA). At 100A primary this gives 1.65V **RMS** (2.33V peak), so the biased signal clips above ~70A RMS — acceptable, since a household branch circuit rarely exceeds 50A continuous.
 2. **Bias divider (2× 10kΩ):** Creates a 1.65V DC midpoint so the AC signal swings around 3.3V/2, keeping it within the ESP32's 0–3.3V ADC input range.
 3. **Coupling capacitor (10µF):** Blocks DC from the burden resistor; passes the 60Hz AC signal.
 4. **MCP6002 buffer:** Unity-gain op-amp buffer presents high impedance to the bias divider, preventing load-induced midpoint drift.
@@ -105,12 +105,35 @@ Key layout decisions:
 | SW1 | Reset Button | — | 6mm THT | — | generic |
 | SW2 | Boot Button | — | 6mm THT | — | generic |
 | CT1, CT2 | CT Sensor | SCT-013-000 | Clamp | SCT-013-000 | Amazon/AliExpress |
+| VT1 | Voltage Sensor Module (plugs into J6) | ZMPT101B | Module | ZMPT101B | Amazon/AliExpress |
+
+---
+
+## ⚠️ Pre-Order Fixes Required (found in DRC audit, 2026-07-02)
+
+A fresh `kicad-cli pcb drc` run found errors that must be fixed **before ordering**:
+
+1. **GND zone islands** — part of the F.Cu ground pour near (58.5, 46.1)mm is isolated
+   from the rest of GND (3 unconnected-items errors). Open the board, refill zones (`B`),
+   locate the island, and join it with a trace or stitching vias. An isolated GND island
+   can leave component ground pins floating — the board may not work at all.
+2. **ESP32 thermal via drills** — the 12 stitching vias in the ESP32 GND pad use 0.2mm
+   drills; the board minimum (and JLCPCB's standard 2-layer process) is 0.3mm. Edit the
+   vias to 0.3mm drill / 0.6mm diameter.
+3. **USB-C (J4) pad clearance** — the GCT USB4085 footprint has 0.15mm pad-to-pad gaps
+   but the Default netclass requires 0.2mm (19 errors). JLCPCB handles down to 0.127mm:
+   set Board Setup → Constraints → minimum clearance to 0.15mm (and the netclass to match).
+
+After fixing: re-run DRC, confirm 0 errors, and **re-export the Gerbers** — the committed
+set predates these fixes.
+
+ERC on the schematic is clean (0 errors, verified same audit).
 
 ---
 
 ## Fabrication Files
 
-Gerber files for JLCPCB are in [`gerbers/`](gerbers/) — generated after final DRC pass.
+Gerber files for JLCPCB are in [`gerbers/`](gerbers/) — **stale, re-export after the DRC fixes above.**
 
 JLCPCB order settings:
 - Layers: 2

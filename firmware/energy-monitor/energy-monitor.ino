@@ -18,6 +18,8 @@
 #define VCAL 234.26 // fine tune this when you measure with your multimeter.
 #define PHASE_SHIFT 1.7 // timing difference
 
+#define SIMULATION 1 // 1 = Wokwi/fake readings, 0 = real board. SET TO 0 BEFORE FLASHING THE REAL BOARD.
+
 #define OLED_WIDTH 128
 #define OLED_HEIGHT 64
 #define OLED_ADDER 0x3C
@@ -46,7 +48,8 @@ String getDataJSON() {
   String json = "{";
   json += "\"vrms\":"   + String(ct1.Vrms, 1)             + ",";
   json += "\"watts1\":" + String(ct1.realPower, 1)        + ",";
-  json += "\"watts2\":" + String(ct1.Vrms * ct2.Irms, 1) + ",";
+  json += "\"va1\":"    + String(ct1.apparentPower, 1)    + ",";
+  json += "\"va2\":"    + String(ct1.Vrms * ct2.Irms, 1) + ","; // CH2 has no voltage phase ref -> VA, not W
   json += "\"pf\":"     + String(ct1.powerFactor, 2)      + ",";
   json += "\"kwh\":"    + String(kwh1 + kwh2, 4);
   json += "}";
@@ -71,8 +74,9 @@ String getDashboardHTML() {
 <body>
   <h1>Home Energy Monitor</h1>
   <div class="card"><div class="value" id="vrms">--</div><div class="label">Voltage (V)</div></div>
-  <div class="card"><div class="value" id="watts1">--</div><div class="label">Channel 1 (W)</div></div>
-  <div class="card"><div class="value" id="watts2">--</div><div class="label">Channel 2 (W)</div></div>
+  <div class="card"><div class="value" id="watts1">--</div><div class="label">Channel 1 Real Power (W)</div></div>
+  <div class="card"><div class="value" id="va1">--</div><div class="label">Channel 1 Apparent Power (VA)</div></div>
+  <div class="card"><div class="value" id="va2">--</div><div class="label">Channel 2 Apparent Power (VA)</div></div>
   <div class="card"><div class="value" id="pf">--</div><div class="label">Power Factor</div></div>
   <div class="card"><div class="value" id="kwh">--</div><div class="label">Total (kWh)</div></div>
   <script>
@@ -82,7 +86,8 @@ String getDashboardHTML() {
         .then(d => {
           document.getElementById('vrms').innerText   = d.vrms   + ' V';
           document.getElementById('watts1').innerText = d.watts1 + ' W';
-          document.getElementById('watts2').innerText = d.watts2 + ' W';
+          document.getElementById('va1').innerText    = d.va1    + ' VA';
+          document.getElementById('va2').innerText    = d.va2    + ' VA';
           document.getElementById('pf').innerText     = d.pf;
           document.getElementById('kwh').innerText    = d.kwh    + ' kWh';
         });
@@ -171,13 +176,16 @@ void loop() {
   ct1.calcVI(20, 2000);
   ct2.calcIrms(1480);
 
-  // DELETE BEFORE FLASHING TO REAL BOARD
+#if SIMULATION
+  // Fake readings so the Wokwi sim shows realistic numbers.
+  // Compiled out entirely when SIMULATION is 0.
   ct1.Vrms         = 120.0;
   ct1.Irms         = 5.0;
   ct1.realPower    = 550.0;
   ct1.apparentPower = 600.0;
   ct1.powerFactor  = 0.92;
   ct2.Irms         = 3.0;
+#endif
 
   float Vrms        = ct1.Vrms;
   float Irms1       = ct1.Irms;

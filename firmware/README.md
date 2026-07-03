@@ -17,7 +17,7 @@ ESP32 firmware written in C++ using the Arduino framework. Reads dual CT sensor 
 │  ADC (GPIO36) ──► Voltage channel sampling           │
 │                                                      │
 │  I2C (GPIO21/22) ──► SSD1306 OLED display           │
-│  WiFi ──► AsyncWebServer ──► Live dashboard          │
+│  WiFi ──► WebServer ──► Live dashboard               │
 └─────────────────────────────────────────────────────┘
 ```
 
@@ -62,8 +62,7 @@ kWh += P * (sample_interval_ms / 3600000)
 | `EmonLib` | RMS sampling + power math | Arduino Library Manager |
 | `Adafruit SSD1306` | OLED driver | Arduino Library Manager |
 | `Adafruit GFX` | Graphics primitives | Arduino Library Manager |
-| `ESPAsyncWebServer` | Non-blocking WiFi server | GitHub |
-| `AsyncTCP` | Required by ESPAsyncWebServer | GitHub |
+| `WiFi` / `WebServer` | WiFi + HTTP dashboard | Built into the ESP32 Arduino core |
 
 ---
 
@@ -89,12 +88,10 @@ kWh += P * (sample_interval_ms / 3600000)
 2. Select board: `ESP32 Dev Module`
 3. Install all dependencies via Library Manager
 4. Set upload speed: `921600`
-5. Flash via J5 programming header (FTDI232 or CP2102 USB-serial adapter)
-
-**PlatformIO (recommended):**
-```bash
-pio run --target upload
-```
+5. **Set `SIMULATION` to `0`** at the top of the sketch — with it at `1` the board
+   reports hardcoded Wokwi test values instead of real measurements
+6. Set your WiFi SSID/password in the sketch
+7. Flash via J5 programming header (FTDI232 or CP2102 USB-serial adapter)
 
 ---
 
@@ -103,8 +100,9 @@ pio run --target upload
 After flashing, the ESP32 hosts a web server on port 80. Connect to the same WiFi network and navigate to the device's IP address (printed to serial on boot).
 
 Dashboard shows:
-- Real-time watts per channel
-- Apparent power (VA)
-- Power factor
+- Mains voltage (Vrms)
+- Channel 1 real power (W) + apparent power (VA)
+- Channel 2 apparent power (VA — CH2 has no voltage phase reference, so real W is not available on this channel)
+- Power factor (channel 1)
 - Cumulative kWh
 - Live waveform plot (planned)

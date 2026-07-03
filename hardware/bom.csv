@@ -37,5 +37,6 @@ SW1,Reset Button,6mm,THT,,1,$0.15,generic
 SW2,Boot Button,6mm,THT,,1,$0.15,generic
 CT1,CT Sensor,SCT-013-000 100A,Clamp,SCT-013-000,1,$7.00,Amazon
 CT2,CT Sensor,SCT-013-000 100A,Clamp,SCT-013-000,1,$7.00,Amazon
+VT1,Voltage Sensor Module (plugs into J6),ZMPT101B,Module,ZMPT101B,1,$8.00,Amazon
 ,,,,PCB Fabrication (JLCPCB 5x),,,$20.00,JLCPCB
-,,,,TOTAL,,,~$42.00,
+,,,,TOTAL,,,~$50.00,

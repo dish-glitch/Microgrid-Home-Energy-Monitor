@@ -59,7 +59,7 @@ The SCT-013 current clamp outputs a small AC signal that mirrors the current in 
 2. **It's in the wrong units** — a burden resistor converts current to a readable voltage via Ohm's Law (V = I × R).
 3. **It carries noise** — an RC low-pass filter passes 60Hz but blocks high-frequency interference.
 
-The ESP32 samples the clean signal at high frequency and runs RMS math in firmware to extract true power values. Power factor is computed from the phase difference between the voltage and current waveforms.
+The ESP32 samples the clean signal at high frequency and runs RMS math in firmware to extract true power values. A ZMPT101B voltage-transformer module (plugged into J6) samples the mains voltage waveform, so real power and power factor can be computed from the phase relationship between the voltage and current waveforms.
 
 ---
 
@@ -71,6 +71,7 @@ The ESP32 samples the clean signal at high frequency and runs RMS math in firmwa
 |---|---|---|---|---|---|---|
 | ESP32-WROOM-32 module | U1 | 1 | ESP-WROOM-32D 5-pack | 5 | ~$16 | [Amazon](https://www.amazon.com/ESP-WROOM-32D-ESP-32-Bluetooth-Module-ESP32-WROOM-32D/dp/B085BNHPW5) |
 | CT sensor SCT-013-000 (100A) | J1, J2 sensors | 2 | KOOBOOK 2-pack | 2 | ~$15 | [Amazon](https://www.amazon.com/KOOBOOK-SCT-013-000-Non-invasive-Current-Transformer/dp/B07S4G2Y27) |
+| ZMPT101B voltage sensor module | J6 sensor | 1 | Single module | 1 | ~$8 | Amazon |
 | Op-amp MCP6002 DIP-8 | U2 | 1 | Juried Engineering 1-pack | 1 | ~$4 | [Amazon](https://www.amazon.com/MICROCHIP-MCP6002-I-MCP6002-Operational-Amplifier/dp/B07GMWJ523) |
 | Voltage regulator AMS1117-3.3 | U3 | 1 | 10-pack SOT-223 | 10 | ~$6 | [Amazon](https://www.amazon.com/AMS1117-3-3-LM1117-SOT-223-Voltage-Regulator/dp/B00Y5EKAU2) |
 | SMD resistors 0603 (33Ω, 10kΩ, 4.7kΩ, 5.1kΩ, 150Ω) | R1–R14 | 14 total | 0603 assortment kit — covers all 5 values | 660pc / 33 values | ~$9 | [Amazon](https://www.amazon.com/660pcs-0603-Resistors-Assortment-Values/dp/B0CH2XD7JY) |
@@ -85,7 +86,7 @@ The ESP32 samples the clean signal at high frequency and runs RMS math in firmwa
 | PCB fabrication | — | 1 run | JLCPCB 5 boards + shipping | 5 boards | ~$20 | [JLCPCB](https://jlcpcb.com) |
 | Enclosure | — | 1 | 3D printed PETG-CF | — | $0 | filament on hand |
 | DigiKey shipping | — | — | Flat rate (order SJ-3523 + USB4085 together) | — | ~$8 | — |
-| **Total** | | | | | **~$124** | |
+| **Total** | | | | | **~$132** | |
 
 ---
 
@@ -134,11 +135,12 @@ Simulates dual CT sensor readings, RMS power math, serial output, and OLED displ
 
 ## Status
 
-- [x] KiCad schematic
+- [x] KiCad schematic — ERC clean
 - [x] PCB layout
+- [ ] PCB pre-order DRC fixes — GND zone islands, ESP32 thermal via drill 0.2→0.3mm, USB-C pad clearance rule (see hardware README)
 - [x] Firmware — ADC sampling + RMS math
 - [x] Firmware — power factor calculation
-- [ ] PCB fabrication (JLCPCB)
+- [ ] PCB fabrication (JLCPCB) — after DRC fixes + Gerber re-export
 - [x] 3D enclosure design
 - [x] WiFi dashboard
 - [ ] Full system test
