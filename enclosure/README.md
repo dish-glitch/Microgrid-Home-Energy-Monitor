@@ -31,7 +31,7 @@ Two-part assembly:
 | Reset button (SW1) | Top lid | ⌀4mm recessed |
 | Boot button (SW2) | Top lid | ⌀4mm recessed |
 
-Programming header (J5) is internal — accessible by removing lid only.
+Programming header (J5) is internal - accessible by removing lid only.
 
 ---
 
