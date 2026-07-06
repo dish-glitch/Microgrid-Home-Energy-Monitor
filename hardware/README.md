@@ -35,13 +35,14 @@ SCT-013 → 33Ω burden resistor → 10µF coupling cap → MCP6002 op-amp buffe
                           10kΩ/10kΩ bias divider (1.65V midpoint)
 ```
 
-1. **Burden resistor (33Ω):** Converts CT current output to a measurable voltage via V = I_secondary × R_burden (SCT-013-000 ratio: 100A:50mA). At 100A primary this gives 1.65V **RMS** (2.33V peak), so the biased signal clips above ~70A RMS — acceptable, since a household branch circuit rarely exceeds 50A continuous.
-2. **Bias divider (2× 10kΩ):** Creates a 1.65V DC midpoint so the AC signal swings around 3.3V/2, keeping it within the ESP32's 0–3.3V ADC input range.
-3. **Coupling capacitor (10µF):** Blocks DC from the burden resistor; passes the 60Hz AC signal.
-4. **MCP6002 buffer:** Unity-gain op-amp buffer presents high impedance to the bias divider, preventing load-induced midpoint drift.
+1. **Burden resistor (33Ω):** The SCT-013 outputs a small currecnt but the ESP32 measures the voltage. The 33 ohm burden resisotr converts that currecnt into a voltage using Ohm's law. At the senors's max rated current, this produeces 1.65 V RMS 2.33 V peak. 
+
+2. **Bias divider (2× 10kΩ):** Becuase the ESP32 ADC can't read negative voltages, 2 10k ohm resistors create a 1.65 V bais point.
+3. **Coupling capacitor (10µF):** Blocks DC from the burden resistor, and passes the 60Hz AC signal.
+4. **MCP6002 buffer:** Unity-gain op-amp buffer to keep the bais network independent from the ESP32 ADC. Its high imput impedance prevents the bais voltage from shifting. 
 
 ### Voltage Sensing
-ZMPT101B voltage transformer connects to J6. Output feeds SENSOR_VP (GPIO36) — an input-only ADC pin with no internal pull resistors, chosen to minimize noise on the analog signal.
+ZMPT101B voltage transformer connects to J6. its output is routed to GPIO36 which is an input-only ADC pin with no internal pull resistors, chosen to minimize noise on the analog signal.
 
 ### I2C Bus
 SDA (GPIO21) and SCL (GPIO22) pulled up to 3.3V via 4.7kΩ resistors. Pull-up value chosen for standard-mode I2C (100 kHz) with expected bus capacitance under 50pF.
