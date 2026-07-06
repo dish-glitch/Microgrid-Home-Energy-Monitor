@@ -122,7 +122,7 @@ Test the firmware logic without hardware — runs in browser:
 
 [![Wokwi Simulation](https://img.shields.io/badge/Wokwi-Run%20Simulation-green?logo=data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCI+PHBhdGggZmlsbD0id2hpdGUiIGQ9Ik04IDV2MTRsMTEtN3oiLz48L3N2Zz4=)](https://wokwi.com/projects/466868484916087809)
 
-Simulates dual CT sensor readings, RMS power math, serial output, and OLED display on a virtual ESP32. CH1 uses hardcoded test values (120V, 5A, 550W, PF 0.92) to verify the signal chain and kWh accumulator logic.
+Simulates dual CT sensor readings, RMS power math, serial output, and OLED display on a virtual ESP32. CH1 uses test values (120V, 5A, 550W, PF 0.92) to verify the signal chain and kWh accumulator logic.
 
 ---
 
