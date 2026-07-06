@@ -2,7 +2,7 @@
 
 3D printed two-part shell designed in Fusion 360 by [@hummos430](https://github.com/hummos430). Provides access to all external connectors while protecting the PCB and managing heat from the AMS1117 regulator.
 
-> **Status:** Design complete — files committed. OLED window to be added after screen arrives. PCB mounted with double-sided tape (v1 build; mounting holes planned for PCB v2).
+> **Status:** Design complete - files committed. OLED window to be added after screen arrives. PCB mounted with double-sided tape (v1 build; mounting holes planned for PCB v2).
 
 ---
 
