@@ -1,6 +1,6 @@
 # Enclosure
 
-3D printed two-part shell designed in Fusion 360 by [@hummos430](https://github.com/hummos430). Provides access to all external connectors while protecting the PCB and managing heat from the AMS1117 regulator.
+A two-part 3D printed shell designed in Fusion 360 by [@hummos430](https://github.com/hummos430). The enclosure provides access to all external connectors while protecting the PCB. It also includes ventilation around the AMS1117 regulator to improove airflow.
 
 > **Status:** Design complete - files committed. OLED window to be added after screen arrives. PCB mounted with double-sided tape (v1 build; mounting holes planned for PCB v2).
 
@@ -31,19 +31,19 @@ Two-part assembly:
 | Reset button (SW1) | Top lid | ⌀4mm recessed |
 | Boot button (SW2) | Top lid | ⌀4mm recessed |
 
-Programming header (J5) is internal; accessible by removing lid only.
+The programming header (J5) is located inside the enclosure and is only accessible by removing the lid.
 
 ---
 
 ## ESP32 Antenna
 
-The ESP32-WROOM-32 antenna is on the short end of the module (farthest from solder pads). The enclosure has vent slots on the wall nearest the antenna- no solid plastic within 5mm of the antenna tip.
+The ESP32-WROOM-32 antenna is located at the short end of the module opposite the solder pads. Vent slots are included in the wall nearest the antenna. No solid plastic is placed within 5mm of the antenna tip to minimize signal attentuation.
 
 ---
 
 ## Heat Dissipation
 
-The AMS1117-3.3 regulator dissipates approximately 0.5W at normal load (~300mA). Thermal design:
+The AMS1117-3.3 regulator typically dissipates around 0.5W at normal load (~300mA). Thermal design:
 
 - **Bottom vent pattern** - decorative cutouts in the floor provide airflow beneath U3
 - **Side clearance** - gap between PCB edge and enclosure wall for lateral airflow
