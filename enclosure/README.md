@@ -9,8 +9,8 @@
 ## Design
 
 Two-part assembly:
-- **Bottom tray** — holds PCB, contains vent pattern below AMS1117, CT jack holes and USB-C cutout on walls
-- **Top lid** — LED holes, boot/reset button cutouts, decorative vent pattern
+- **Bottom tray** - holds PCB, contains vent pattern below AMS1117, CT jack holes and USB-C cutout on walls
+- **Top lid** - LED holes, boot/reset button cutouts, decorative vent pattern
 
 ### Dimensions
 - **Total height:** 20mm
