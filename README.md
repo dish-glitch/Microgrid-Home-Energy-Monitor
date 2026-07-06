@@ -69,7 +69,7 @@ The ESP32 samples the clean signal at high frequency and runs RMS math in firmwa
 
 | Component | Ref | Need | What to Buy | Pack | Est. Order Price | Where |
 |---|---|---|---|---|---|---|
-| ESP32-WROOM-32 module | U1 | 1 | ESP-WROOM-32D 5-pack | 5 | ~$16 | [Amazon](https://www.amazon.com/ESP-WROOM-32D-ESP-32-Bluetooth-Module-ESP32-WROOM-32D/dp/B085BNHPW5) |
+| ESP32-WROOM-32 module | U1 | 1 | ESP-WROOM-32D 5-pack | 5 | ~$16 | [Amazon][(https://www.amazon.com/ESP-WROOM-32D-ESP-32-Bluetooth-Module-ESP32-WROOM-32D/dp/B085BNHPW5)](https://www.amazon.com/DORHEA-ESP-WROOM-32D-Bluetooth-integrates-ESP32-D0WD/dp/B08XXH9RMT/ref=sr_1_4?crid=1PAA57ZDBXXKA&dib=eyJ2IjoiMSJ9._MntEg_yRxGkBw1EfxLq6cc-w3Tk4YEgtB1QtlP6Z4yxtTF4Fgfk1zGfVmxLEI5m1rj4c-1jFTGRVePtGjaZB-u8IC_M2NuE5i72-Z6dyDMhy--t0tJ7uNgECgIogId0cCfDd5HPa67FyROcsTOtQSfSzK0LDP2i9msGrrE8LXcygPlws7SA2oZ1K6vlKAqsIRbaACC8jXyDBxBi5YwBBB_2cBgjYlD-LvbD8llQCdCVJK7sxuom2wjza4DP2pI0dcSs2QY-L5haReDtaOngVqGGzxCfWKOjql3sHXlfzxA.qUdqsXgRGlyqVaLIAANpF-NeytYFG2HdsdXi1yK_r4c&dib_tag=se&keywords=ESP-WROOM-32D%2BESP32%2B2.4GHz%2BDual-Mode%2BBluetooth%2Band%2BWiFi%2BLow%2BPower%2BModule&nsdOptOutParam=true&qid=1783296447&s=electronics&sprefix=esp-wroom-32d%2Besp32%2B2.4ghz%2Bdual-mode%2Bbluetooth%2Band%2Bwifi%2Blow%2Bpower%2Bmodule%2Celectronics%2C220&sr=1-4&th=1) |
 | CT sensor SCT-013-000 (100A) | J1, J2 sensors | 2 | KOOBOOK 2-pack | 2 | ~$15 | [Amazon](https://www.amazon.com/KOOBOOK-SCT-013-000-Non-invasive-Current-Transformer/dp/B07S4G2Y27) |
 | ZMPT101B voltage sensor module | J6 sensor | 1 | Single module | 1 | ~$8 | Amazon |
 | Op-amp MCP6002 DIP-8 | U2 | 1 | Juried Engineering 1-pack | 1 | ~$4 | [Amazon](https://www.amazon.com/MICROCHIP-MCP6002-I-MCP6002-Operational-Amplifier/dp/B07GMWJ523) |
