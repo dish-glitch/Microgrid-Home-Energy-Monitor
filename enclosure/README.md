@@ -45,10 +45,10 @@ The ESP32-WROOM-32 antenna is on the short end of the module (farthest from sold
 
 The AMS1117-3.3 regulator dissipates approximately 0.5W at normal load (~300mA). Thermal design:
 
-- **Bottom vent pattern** — decorative cutouts in the floor provide airflow beneath U3
-- **Side clearance** — gap between PCB edge and enclosure wall for lateral airflow
-- **Open internal cavity** — no foam or insulation inside
-- **Material: PETG-CF** — carbon fiber PETG, stiffer and more heat resistant than standard PETG or PLA
+- **Bottom vent pattern** - decorative cutouts in the floor provide airflow beneath U3
+- **Side clearance** - gap between PCB edge and enclosure wall for lateral airflow
+- **Open internal cavity** - no foam or insulation inside
+- **Material: PETG-CF** - carbon fiber PETG, stiffer and more heat resistant than standard PETG or PLA
 
 ---
 
