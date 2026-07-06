@@ -31,17 +31,9 @@
 
 ---
 
-## Why I Built This
-
-In February 2021, over 4.5 million Texas homes lost power in freezing temperatures during a power grid failure. I was one of them, the winter was hard with all hotels being booked as people scrambled to get heat. It was a very hard winter with our apartment getting to around 60 degrees Fahrenheit. I wanted to understand why the grid failure happened and came to the conclusion, The problem was that grid operators had almost no real-time view into household consumption of power. They didn't have the data to see the demand of power was changing minute by minute as more people in homes turned on their heaters to warm their homes. I want to understand how power is measured, how the grid sees demand so I will try to build a custom PCB that clips non-invasive current transformer sensors around wires and measure real-time power usage I would like it to measure Watts. Apparent power (VA) and Power factor.
-
-
-
----
-
 ## What It Does
 
-Non-invasive current transformer (CT) sensors clip around household wires inside a breaker box(does not touch any live wires). The custom PCB conditions the signal from the sensors and feeds it to an ESP32 microcontroller, which measures:
+Non-invasive current transformer (CT) sensors clip around household wires inside a breaker box(does not touch any live wires). The custom PCB conditions the signal from the sensors and feeds it to an ESP32 microcontroller. The microcontroller then samples the voltage and current to compute:
 
 - **Real Power (Watts)** 
 - **Apparent Power (VA)**
@@ -53,13 +45,13 @@ A live dashboard is served over WiFi and accessible from any browser on the netw
 
 ## How It Works
 
-The SCT-013 current clamp outputs a small AC signal that mirrors the current in the wire it's clamped around. That signal has three problems before the ESP32 can read it:
+The SCT-013 current clamp outputs a small AC signal that mirrors the current in the wire it's clamped around. Before the ESP-32 is able to sample the signal, it must condition it. 
 
 1. **It swings negative** — the ESP32 ADC only reads 0–3.3V. An op-amp bias circuit lifts the signal to a 1.65V midpoint so it never goes below 0V.
 2. **It's in the wrong units** — a burden resistor converts current to a readable voltage via Ohm's Law (V = I × R).
 3. **It carries noise** — an RC low-pass filter passes 60Hz but blocks high-frequency interference.
 
-The ESP32 samples the clean signal at high frequency and runs RMS math in firmware to extract true power values. A ZMPT101B voltage-transformer module (plugged into J6) samples the mains voltage waveform, so real power and power factor can be computed from the phase relationship between the voltage and current waveforms.
+The ESP32 samples the signal and calculates RMS values in firmware and then uses those measurements to produce real power, apparent power, and power factor. 
 
 ---
 
@@ -151,7 +143,7 @@ Simulates dual CT sensor readings, RMS power math, serial output, and OLED displ
 ## Acknowledgements
 
 - **[@hummos430](https://github.com/hummos430)** — Designed and 3D printed the enclosure in Fusion 360
-- **[Claude (Anthropic)](https://claude.ai)** — Used as an AI assistant throughout this project: helped write and organize the GitHub documentation, cross-checked the BOM against the schematic, verified part selections and package types, and reviewed the overall plan. The schematic, PCB layout, firmware, and engineering decisions are my own work.
+- **[Claude (Anthropic)](https://claude.ai)** — Claude was used for planning and documentation, primarily creating tables in GitHub, and organizing the documentation. It also helped review the BOM and sanity-check components. The schematic, PCB layone, firmware, and engineering decisions are my own. 
 
 ---
 
