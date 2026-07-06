@@ -1,6 +1,6 @@
 # Firmware
 
-ESP32 firmware written in C++ using the Arduino framework. Reads dual CT sensor channels and a ZMPT101B voltage sensor, computes real power, apparent power, and power factor, displays live readings on an SSD1306 OLED, and serves a WiFi dashboard.
+The firmware is written in C++ using the Arduino framework and runs on the ESP32. It samples two CT current sensors and a ZMPT101B voltage sensor to calculate real power, apparent power, power factor, and cumulative energy usage. Live measurements are displayed on an SSD1306 and are also available through a built-in WiFi dashboard.
 
 > **Status:** In development — PCB fabrication completing first.
 
@@ -97,7 +97,7 @@ kWh += P * (sample_interval_ms / 3600000)
 
 ## WiFi Dashboard
 
-After flashing, the ESP32 hosts a web server on port 80. Connect to the same WiFi network and navigate to the device's IP address (printed to serial on boot).
+Once programmed, the ESP32 hosts a web server on port 80. Connect a device to the same WiFi network and open the ESP32's IP address in a web browser. The IP address is printed to the serial monitor during startup.
 
 Dashboard shows:
 - Mains voltage (Vrms)
