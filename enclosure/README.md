@@ -37,7 +37,7 @@ Programming header (J5) is internal; accessible by removing lid only.
 
 ## ESP32 Antenna
 
-The ESP32-WROOM-32 antenna is on the short end of the module (farthest from solder pads). The enclosure has vent slots on the wall nearest the antenna — no solid plastic within 5mm of the antenna tip.
+The ESP32-WROOM-32 antenna is on the short end of the module (farthest from solder pads). The enclosure has vent slots on the wall nearest the antenna- no solid plastic within 5mm of the antenna tip.
 
 ---
 
