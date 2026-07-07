@@ -143,7 +143,7 @@ Simulates dual CT sensor readings, RMS power math, serial output, and OLED displ
 ## Acknowledgements
 
 - **[@hummos430](https://github.com/hummos430)** — Designed and 3D printed the enclosure in Fusion 360
-- **[Claude (Anthropic)](https://claude.ai)** — Claude was used for planning and documentation, primarily creating tables in GitHub, and organizing the documentation. It also helped review the BOM and sanity-check components. The schematic, PCB layone, firmware, and engineering decisions are my own. 
+- **[Claude (Anthropic)](https://claude.ai)** — Claude was used to help document this project. I often recorded voice notes describing my engineering ideas, design decisions, and progress, then used Claude to organize those notes into structured GitHub documentation and tables. It also helped review the BOM and sanity-check component selections for consistency. The schematic, PCB layout, firmware, testing, and engineering decisions are my own.
 
 ---
 
