@@ -31,8 +31,8 @@ C6,LDO Output Bulk,10µF,0805,,1,$0.10,generic
 C7,ESP32 VDD Bypass,100nF,0603,,1,$0.05,generic
 C8,ESP32 VDD Bulk,10µF,0805,,1,$0.10,generic
 C9,EN Filter Cap,100nF,0603,,1,$0.05,generic
-D1,Power LED,Red 5mm,THT,,1,$0.10,generic
-D2,Status LED,Green 5mm,THT,,1,$0.10,generic
+D1,Power LED,Red 3mm,THT,,1,$0.10,generic
+D2,Status LED,Green 3mm,THT,,1,$0.10,generic
 SW1,Reset Button,6mm,THT,,1,$0.15,generic
 SW2,Boot Button,6mm,THT,,1,$0.15,generic
 CT1,CT Sensor,SCT-013-000 100A,Clamp,SCT-013-000,1,$7.00,Amazon
