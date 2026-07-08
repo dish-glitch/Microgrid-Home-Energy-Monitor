@@ -4,6 +4,7 @@
 #include <Adafruit_SSD1306.h>
 #include <WiFi.h>
 #include <WebServer.h>
+#include <ModbusIP_ESP8266.h> // Modbus TCP server
 
 
 // ================================================
@@ -29,6 +30,21 @@ const char* WIFI_PASS = "WIFI PASSWORD"; // change <----------------------------
 
 WebServer server(80);
 
+// ================================================
+// --- Modbus TCP server ---
+// ================================================
+ModbusIP mb; // creates the server. 
+
+// the HREG_VRMS   0 makes it easier to understand insted of using 16 bit numbers. 
+#define HREG_VRMS   0 // Vrms         x10   (1200 = 120.0 V)
+#define HREG_IRMS1  1 // Irms CH1     x100  (500  = 5.00 A)
+#define HREG_WATTS1 2 // real power   x1    (600  = 600 W)
+#define HREG_VA1    3 // apparent pwr x1    (650  = 650 VA)
+#define HREG_PF     4 // power factor x100  (92   = 0.92)
+#define HREG_KWH    5 // total kWh    x10   (123  = 12.3 kWh)
+#define HREG_IRMS2  6 // Irms CH2     x100  (300  = 3.00 A)
+#define HREG_WATTS2 7 // power CH2    x1    (360  = 360 W)
+
 Adafruit_SSD1306 display(OLED_WIDTH, OLED_HEIGHT, &Wire, -1);
 
 EnergyMonitor ct1;
@@ -36,7 +52,7 @@ EnergyMonitor ct2;
 
 float kwh1 = 0.0; // gets energy over time
 float kwh2 = 0.0; // gets energy over time
-unsigned long lastMillis = 0; // counts up from 0 and does NOT go into the negatives (tracks time)
+unsigned long lastMillis = 0; // counts up from 0 (time)
 bool wifiConnected = false;
 
 
@@ -156,6 +172,18 @@ void setup() {
       server.send(200, "application/json", getDataJSON());
     });
     server.begin();
+
+    // --- Modbus TCP server ---
+    mb.server();               // start listening for Modbus clients on port 502
+    mb.addHreg(HREG_VRMS);     // create each holding register 
+    mb.addHreg(HREG_IRMS1);
+    mb.addHreg(HREG_WATTS1);
+    mb.addHreg(HREG_VA1);
+    mb.addHreg(HREG_PF);
+    mb.addHreg(HREG_KWH);
+    mb.addHreg(HREG_IRMS2);
+    mb.addHreg(HREG_WATTS2);
+    Serial.println("Modbus TCP server started on port 502");
   } else {
     Serial.println();
     Serial.println("WiFi not found — running without dashboard");
@@ -201,6 +229,17 @@ void loop() {
   kwh2 += (watts2 / 1000.0) * fullHours;
   lastMillis = now;
 
+  // --- Push readings into the Modbus registers ---
+  // Multiply by the scale factor then send the number to what the register  an hold.
+  mb.Hreg(HREG_VRMS,   (uint16_t)(Vrms         * 10));  // 120.0 V -> 1200 << here is a example. 
+  mb.Hreg(HREG_IRMS1,  (uint16_t)(Irms1        * 100)); 
+  mb.Hreg(HREG_WATTS1, (uint16_t)(watts1));             
+  mb.Hreg(HREG_VA1,    (uint16_t)(val1));               
+  mb.Hreg(HREG_PF,     (uint16_t)(powerFactor1 * 100)); 
+  mb.Hreg(HREG_KWH,    (uint16_t)((kwh1 + kwh2) * 10)); 
+  mb.Hreg(HREG_IRMS2,  (uint16_t)(Irms2        * 100)); 
+  mb.Hreg(HREG_WATTS2, (uint16_t)(watts2));             
+
   Serial.printf("V:%.1fV  CH1:%.2fA %.1fW PF:%.2f  CH2:%.2fA %.1fW  kWh:%.4f\n",
     Vrms, Irms1, watts1, powerFactor1, Irms2, watts2, kwh1 + kwh2);
 
@@ -216,7 +255,10 @@ void loop() {
   display.printf("Total: %.3f kWh", kwh1 + kwh2);
   display.display();
 
-  if (wifiConnected) server.handleClient();
+  if (wifiConnected) {
+    server.handleClient(); // answer web browsers (port 80)
+    mb.task();             // answer Modbus clients  (port 502)
+  }
 
   delay(500);
 }

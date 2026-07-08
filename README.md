@@ -1,6 +1,6 @@
 # Home Energy Monitor
 
-**A custom PCB that measures real-time household power consumption (Watts, apparent power (VA), and power factor) and streams live data to a OLED screen.**
+**A custom PCB that measures real-time household power consumption (Watts, apparent power (VA), and power factor) and streams live data to an OLED screen, a WiFi dashboard, and a Modbus TCP/IP server (the same protocol real industrial power meters use).**
 
 ![Status](https://img.shields.io/badge/status-in%20progress-yellow)
 ![License](https://img.shields.io/badge/license-MIT-blue)
@@ -40,7 +40,8 @@ Non-invasive current transformer (CT) sensors clip around household wires inside
 - **Power Factor** 
 - **Cumulative kWh** 
 
-A live dashboard is served over WiFi and accessible from any browser on the network. A small OLED on the device shows readings.
+The readings come out three ways: a small OLED on the device, a live dashboard served over WiFi that you can open in any browser, and a Modbus TCP/IP server so industrial software like PLCs, SCADA, or Home Assistant can read the meter directly.
+
 ---
 
 ## How It Works
@@ -52,6 +53,29 @@ The SCT-013 current clamp outputs a small AC signal that mirrors the current in 
 3. **It carries noise** — an RC low-pass filter passes 60Hz but blocks high-frequency interference.
 
 The ESP32 samples the signal and calculates RMS values in firmware and then uses those measurements to produce real power, apparent power, and power factor. 
+
+---
+
+## Modbus TCP/IP
+
+I added a Modbus TCP server so this works more like a real industrial power meter instead of just a hobby project. Modbus is the protocol that commercial meters from companies like Schneider Electric and ABB use to send their readings to building systems and SCADA software. I got the idea from a PLC Dojo certification I finished on programming Modbus TCP clients and servers, and I wanted to actually use what I learned on my own hardware.
+
+The ESP32 runs the Modbus server on port 502 at the same time as the web dashboard on port 80, so both run off the same WiFi. Any Modbus client, like a PLC, SCADA software, Home Assistant, Node-RED, or even a Python script, can read the meter by asking for its holding registers with Function Code 3.
+
+Modbus registers can only hold 16-bit whole numbers, so I scale the decimal readings into whole numbers before writing them, and the client divides by the same number to get the real value back.
+
+| Register | Modbus Address | Value | Scaling | Example |
+|---|---|---|---|---|
+| 0 | 40001 | Voltage (Vrms) | ×10 | `1200` → 120.0 V |
+| 1 | 40002 | Current CH1 (Irms) | ×100 | `500` → 5.00 A |
+| 2 | 40003 | Real Power CH1 (W) | ×1 | `600` → 600 W |
+| 3 | 40004 | Apparent Power CH1 (VA) | ×1 | `650` → 650 VA |
+| 4 | 40005 | Power Factor | ×100 | `92` → 0.92 |
+| 5 | 40006 | Total Energy (kWh) | ×10 | `123` → 12.3 kWh |
+| 6 | 40007 | Current CH2 (Irms) | ×100 | `300` → 3.00 A |
+| 7 | 40008 | Real Power CH2 (W) | ×1 | `360` → 360 W |
+
+> Register 0 in the code shows up as 40001 in most Modbus software. The 4xxxx numbering is just the standard way holding registers get labeled.
 
 ---
 
@@ -109,6 +133,7 @@ home-energy-monitor/
 | June 16, 2026 | 3D enclosure designed by [@hummos430](https://github.com/hummos430) in Fusion 360 — files committed |
 | June 16, 2026 | Stardance funding submitted — S tier $150 |
 | July 3, 2026 | DRC audit fixes — solid B.Cu ground plane added, ESP32 thermal via drills fixed, USB-C clearance rule corrected. ERC + DRC verified 0 errors. Gerbers re-exported — board ready to order |
+| July 8, 2026 | Modbus TCP/IP server added — ESP32 exposes 8 holding registers on port 502, runs alongside the web dashboard |
 | — | PCBs ordered from JLCPCB |
 | — | PCBs arrived, soldering complete |
 | — | Firmware calibrated, first real power readings |
@@ -136,6 +161,7 @@ Simulates dual CT sensor readings, RMS power math, serial output, and OLED displ
 - [ ] PCB fabrication (JLCPCB)
 - [x] 3D enclosure design
 - [x] WiFi dashboard
+- [x] Modbus TCP/IP server (8 holding registers, Function Code 3)
 - [ ] Full system test
 
 ---
