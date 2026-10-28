@@ -49,7 +49,7 @@ SDA (GPIO21) and SCL (GPIO22) pulled up to 3.3V via 4.7kΩ resistors. Pull-up va
 
 ### ESP32 Boot Circuit
 - EN pulled high via 10kΩ (R7) + 100nF to GND for clean power-on reset
-- GPIO0 pulled high via 10kΩ (R10); SW2 pulls GPIO0 low for bootloader entry
+- GPIO0 held high by the ESP32's internal pull-up; SW2 pulls GPIO0 low for bootloader entry (R10 was meant as an external pull-up, but rev 1 wires it EN ↔ GPIO0 — leave it unfitted, see Assembly Notes)
 - SW1 pulls EN low for hard reset
 
 ---
@@ -85,15 +85,15 @@ Key layout decisions:
 | U3 | AMS1117-3.3 | 3.3V LDO | SOT-223 | AMS1117-3.3 | Digikey 1665-1016-1-ND |
 | J1, J2 | CT Sensor Input | 3.5mm jack | SMD | SJ-3523-SMT | Digikey CP-3523SJCT-ND |
 | J3 | OLED Connector | 4-pin | 2.54mm header | — | generic |
-| J4 | USB-C Receptacle | USB 2.0 | SMD 16P | GCT USB4085-GF-A | Digikey 2073-USB4085-GF-ACT-ND |
+| J4 | USB-C Receptacle (optional, see notes) | USB 2.0 | THT 16P | GCT USB4085-GF-A | Digikey 2073-USB4085-GF-ACT-ND |
 | J5 | Programming Header | 6-pin | 2.54mm header | — | generic |
 | J6 | ZMPT101B Connector | 3-pin | 2.54mm header | — | generic |
-| R1, R2 | Burden Resistor | 33Ω 1% | 0603 | — | generic |
-| R3–R6 | Bias Resistor | 10kΩ | 0603 | — | generic |
+| R1, R4 | Burden Resistor (CH1, CH2) | 33Ω 1% | 0603 | — | generic |
+| R2, R3, R5, R6 | Bias Resistor (R2/R3 CH1, R5/R6 CH2) | 10kΩ | 0603 | — | generic |
 | R7 | EN Pull-up | 10kΩ | 0603 | — | generic |
 | R8, R9 | I2C Pull-up | 4.7kΩ | 0603 | — | generic |
-| R10 | GPIO0 Pull-up | 10kΩ | 0603 | — | generic |
-| R11, R12 | CC Pull-down | 5.1kΩ | 0603 | — | generic |
+| R10 | GPIO0 Pull-up — **do not fit on rev 1**, see notes | 10kΩ | 0603 | — | generic |
+| R11, R12 | CC Pull-down (only needed with J4) | 5.1kΩ | 0603 | — | generic |
 | R13, R14 | LED Current Limit | 150Ω | 0603 | — | generic |
 | C1, C2 | Coupling Cap | 10µF | 0805 | — | generic |
 | C3, C6 | LDO Bulk Cap | 10µF | 0805 | — | generic |
@@ -101,12 +101,36 @@ Key layout decisions:
 | C7 | ESP32 Bypass | 100nF | 0603 | — | generic |
 | C8 | ESP32 Bulk | 10µF | 0805 | — | generic |
 | C9 | EN Filter Cap | 100nF | 0603 | — | generic |
-| D1 | Power LED | Red | 5mm THT | — | generic |
-| D2 | Status LED | Green | 5mm THT | — | generic |
+| D1 | Power LED | Red | 3mm THT | — | generic |
+| D2 | Status LED | Green | 3mm THT | — | generic |
 | SW1 | Reset Button | — | 6mm THT | — | generic |
 | SW2 | Boot Button | — | 6mm THT | — | generic |
 | CT1, CT2 | CT Sensor | SCT-013-000 | Clamp | SCT-013-000 | Amazon/AliExpress |
 | VT1 | Voltage Sensor Module (plugs into J6) | ZMPT101B | Module | ZMPT101B | Amazon/AliExpress |
+
+---
+
+## Assembly Notes (rev 1)
+
+Lessons from assembling the first board (solder paste + hot plate for SMD, iron for THT):
+
+- **Read the 0603 resistor markings.** The 10kΩ bias resistors are marked **`01C`** (EIA-96) or **`103`**. A part marked **`01X`** is **10Ω** — fitting those in R2/R3/R5/R6 puts two 20Ω paths across the 3.3V rail and looks exactly like a short (supply drops into CC, the resistors near U2 get warm).
+- **R10 — do not fit.** The BOM calls it a GPIO0 pull-up, but on the rev 1 PCB it is wired **EN ↔ GPIO0**, which drags GPIO0 low whenever RESET is pressed and can drop the ESP32 into download mode. The ESP32's internal pull-up on GPIO0 is enough, and SW2 still pulls it low to flash. *Fix for rev 2: connect R10 between GPIO0 and +3.3V.*
+- **J4 (USB-C) is optional.** It is power-only (D+/D− are not connected). Without it, power the board from a 5V bench supply into the J4 **VBUS** and **GND** holes or **TP1 (VBUS) / TP3 (GND)**, and leave R11/R12 off. In each J4 row the outermost small hole is GND and the next one in is VBUS; the four large oval slots are the shield and are **not** connected.
+- **U2 orientation:** pin 1 is the **square pad**, at the notch end next to **TP2**. A socket is worth it — the chip is easy to damage when desoldering.
+- **Do the SMD reflow before any THT parts** — headers, buttons and LEDs have plastic that will not survive the hot plate.
+- **Programming:** J5 needs only 3 wires to a CP2102 — GND→pin 1, TXD→pin 4 (RX0), RXD→pin 3 (TX0). Leave the adapter's 3V3/5V unconnected when the board has its own supply. There is no auto-reset circuit: hold **BOOT (SW2)**, tap **RESET (SW1)**, release BOOT, upload, then press RESET.
+- **OLED pin order:** many SSD1306 modules are **GND, VCC, SCL, SDA**, while J3 is **3.3V, GND, SCL, SDA**. Wire by label with jumpers instead of plugging the module straight in.
+
+### Bring-up checklist
+
+| Check | Expected |
+|---|---|
+| TP2 (3.3V) ↔ TP3 (GND), continuity, unpowered | **No beep** |
+| 5V supply, ESP32 with factory firmware | CV, ~0.11 A, D1 lit |
+| TP2 | 3.3V |
+| [`board-test`](../firmware/board-test/board-test.ino) sketch, no sensors connected | CT1 ≈ CT2 ≈ **1650 mV** (bias midpoint), D2 blinking, BOOT button reported |
+| OLED on J3 | I2C scan finds **0x3C** |
 
 ---
 

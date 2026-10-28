@@ -5,21 +5,21 @@ U3,AMS1117-3.3,3.3V LDO,SOT-223,AMS1117-3.3,1,$0.35,Digikey
 J1,CT Sensor Jack,3.5mm stereo,SMD,SJ-3523-SMT,1,$0.60,Digikey
 J2,CT Sensor Jack,3.5mm stereo,SMD,SJ-3523-SMT,1,$0.60,Digikey
 J3,OLED Connector,4-pin 2.54mm,THT header,,1,$0.10,generic
-J4,USB-C Receptacle,USB 2.0 16P,SMD,GCT USB4085-GF-A,1,$0.85,Digikey
+J4,USB-C Receptacle (optional - board can run from a 5V bench supply on VBUS/GND),USB 2.0 16P,THT,GCT USB4085-GF-A,1,$0.85,Digikey
 J5,Programming Header,6-pin 2.54mm,THT header,,1,$0.10,generic
 J6,ZMPT101B Connector,3-pin 2.54mm,THT header,,1,$0.10,generic
-R1,Burden Resistor,33Ω 1%,0603,,1,$0.05,generic
-R2,Burden Resistor,33Ω 1%,0603,,1,$0.05,generic
-R3,Bias Resistor,10kΩ,0603,,1,$0.02,generic
-R4,Bias Resistor,10kΩ,0603,,1,$0.02,generic
-R5,Bias Resistor,10kΩ,0603,,1,$0.02,generic
-R6,Bias Resistor,10kΩ,0603,,1,$0.02,generic
+R1,Burden Resistor CH1,33Ω 1%,0603,,1,$0.05,generic
+R2,Bias Resistor CH1,10kΩ,0603,,1,$0.05,generic
+R3,Bias Resistor CH1,10kΩ,0603,,1,$0.02,generic
+R4,Burden Resistor CH2,33Ω 1%,0603,,1,$0.02,generic
+R5,Bias Resistor CH2,10kΩ,0603,,1,$0.02,generic
+R6,Bias Resistor CH2,10kΩ,0603,,1,$0.02,generic
 R7,EN Pull-up,10kΩ,0603,,1,$0.02,generic
 R8,I2C Pull-up SDA,4.7kΩ,0603,,1,$0.02,generic
 R9,I2C Pull-up SCL,4.7kΩ,0603,,1,$0.02,generic
-R10,GPIO0 Pull-up,10kΩ,0603,,1,$0.02,generic
-R11,CC1 Pull-down,5.1kΩ,0603,,1,$0.02,generic
-R12,CC2 Pull-down,5.1kΩ,0603,,1,$0.02,generic
+R10,GPIO0 Pull-up (DO NOT FIT on rev 1 - PCB wires it EN to GPIO0),10kΩ,0603,,1,$0.02,generic
+R11,CC1 Pull-down (only needed with J4),5.1kΩ,0603,,1,$0.02,generic
+R12,CC2 Pull-down (only needed with J4),5.1kΩ,0603,,1,$0.02,generic
 R13,LED Resistor D1,150Ω,0603,,1,$0.02,generic
 R14,LED Resistor D2,150Ω,0603,,1,$0.02,generic
 C1,Coupling Cap CH1,10µF,0805,,1,$0.10,generic

@@ -2,7 +2,7 @@
 
 **A custom PCB that measures real-time household power consumption (Watts, apparent power (VA), and power factor) and streams live data to an OLED screen, a WiFi dashboard, and a Modbus TCP/IP server (the same protocol real industrial power meters use).**
 
-![Status](https://img.shields.io/badge/status-in%20progress-yellow)
+![Status](https://img.shields.io/badge/status-board%20assembled%20%26%20running-yellowgreen)
 ![License](https://img.shields.io/badge/license-MIT-blue)
 ![KiCad](https://img.shields.io/badge/PCB-KiCad-blue)
 ![Platform](https://img.shields.io/badge/platform-ESP32-green)
@@ -93,7 +93,7 @@ Modbus registers can only hold 16-bit whole numbers, so I scale the decimal read
 | SMD resistors 0603 (33Ω, 10kΩ, 4.7kΩ, 5.1kΩ, 150Ω) | R1–R14 | 14 total | 0603 assortment kit — covers all 5 values | 660pc / 33 values | ~$9 | [Amazon](https://www.amazon.com/660pcs-0603-Resistors-Assortment-Values/dp/B0CH2XD7JY) |
 | SMD capacitors 0603+0805 (100nF, 10µF) | C1–C9 | 9 total | 0603/0805 assortment kit (10pF–22µF) | 960pc / 16 values | ~$10 | [Amazon](https://www.amazon.com/Capacitor-10pF-22uF-Multilayer-Capacitors-Assortment/dp/B094Z9V5KK) |
 | 3.5mm audio jack SMT (CUI SJ-3523-SMT) | J1, J2 | 2 | Order 2 individually | 2 | ~$5 | [DigiKey](https://www.digikey.com/en/products/detail/same-sky-formerly-cui-devices/SJ-3523-SMT-TR/281297) |
-| USB-C receptacle (GCT USB4085-GF-A) | J4 | 1 | Order 1 individually | 1 | ~$1 | [DigiKey](https://www.digikey.com/en/products/detail/gct/USB4085-GF-A/9859662) |
+| USB-C receptacle (GCT USB4085-GF-A) — optional, the board can be powered from a 5V bench supply | J4 | 1 | Order 1 individually | 1 | ~$1 | [DigiKey](https://www.digikey.com/en/products/detail/gct/USB4085-GF-A/9859662) |
 | 3mm LED (red or green) | D1, D2 | 2 | 10-pack | 10 | ~$5 | [Amazon](https://www.amazon.com/3mm-Round-Top-Red-LED/dp/B017TR4XWW) |
 | Tactile button 6×6×4.3mm THT | SW1, SW2 | 2 | 10-pack | 10 | ~$5 | [Amazon](https://www.amazon.com/6x6x4-3mm-Momentary-Tactile-Button-Through/dp/B00EDJYK46) |
 | 2.54mm male pin headers (J3 4-pin, J5 6-pin, J6 3-pin) | J3, J5, J6 | 13 pins | 40-pin breakable strip (snap to length) | 10×40 strips | ~$6 | [Amazon](https://www.amazon.com/MCIGICM-Header-2-45mm-Arduino-Connector/dp/B07PKKY8BX) |
@@ -111,7 +111,7 @@ Modbus registers can only hold 16-bit whole numbers, so I scale the decimal read
 ```
 home-energy-monitor/
 ├── hardware/        # KiCad schematic, PCB layout, Gerber files
-├── firmware/        # ESP32 Arduino code
+├── firmware/        # ESP32 Arduino code (energy-monitor + board-test bring-up sketch)
 ├── enclosure/       # FreeCAD source + STL files for 3D printing
 └── docs/
     └── photos/      # Build progress photos
@@ -134,10 +134,42 @@ home-energy-monitor/
 | June 16, 2026 | Stardance funding submitted — S tier $150 |
 | July 3, 2026 | DRC audit fixes — solid B.Cu ground plane added, ESP32 thermal via drills fixed, USB-C clearance rule corrected. ERC + DRC verified 0 errors. Gerbers re-exported — board ready to order |
 | July 8, 2026 | Modbus TCP/IP server added — ESP32 exposes 8 holding registers on port 502, runs alongside the web dashboard |
-| — | PCBs ordered from JLCPCB |
-| — | PCBs arrived, soldering complete |
+| — | PCBs ordered from JLCPCB and received |
+| Oct 22, 2026 | Board assembly started — SMD parts with solder paste on a mini hot plate, THT by hand |
+| Oct 23, 2026 | First power-up. Tracked a 3.3V rail "short" down to 10Ω resistors (marked `01X`) fitted where the 10kΩ bias resistors (`01C`) belong — replaced them, rail came up at 3.3V. ESP32 boots and flashes over the J5 header |
+| Oct 28, 2026 | Op-amp replaced (bench-tested on a breadboard first) and a bodge wire added for a damaged U2 pin 5 pad. Both CT channels verified at the 1.65V bias point, OLED found on I2C, full firmware running on the board |
 | — | Firmware calibrated, first real power readings |
 | — | Dashboard live, full system working |
+
+---
+
+## Build Photos
+
+The assembled board running the real firmware (still in `SIMULATION 1` mode until the CT jacks and voltage sensor are connected) — OLED live, power LED and status LED on:
+
+![OLED showing live readings on the assembled board](docs/photos/assembly/oled-live-readings.jpg)
+
+![Assembled board, top view — ESP32, MCP6002 front end with the pin 5 bodge wire, power and status LEDs lit](docs/photos/assembly/board-top.jpg)
+
+![Assembled board with the OLED running the firmware](docs/photos/assembly/oled-angle.jpg)
+
+| First power-up | 5V bench supply, constant-voltage mode |
+|---|---|
+| ![Board powered with the red power LED lit](docs/photos/assembly/first-power-up.jpg) | ![Bench supply at 5.00V, 0.114A](docs/photos/assembly/bench-supply-5v.jpg) |
+
+**Bring-up test** ([`firmware/board-test`](firmware/board-test/board-test.ino)) — the OLED answers on I2C, and both CT channels sit at the 1.65V bias midpoint with no clamp plugged in:
+
+![I2C scan finds the OLED at 0x3C](docs/photos/assembly/serial-i2c-scan.png)
+
+![CT1 and CT2 both reading about 1680 mV](docs/photos/assembly/serial-ct-bias.png)
+
+Firmware serial output — readings every loop, kWh accumulating:
+
+![Energy monitor firmware serial output](docs/photos/assembly/serial-firmware-readings.jpg)
+
+ESP32 boot log over the J5 programming header:
+
+![ESP32 boot log in the Arduino serial monitor](docs/photos/assembly/serial-boot-log.png)
 
 ---
 
@@ -158,10 +190,13 @@ Simulates dual CT sensor readings, RMS power math, serial output, and OLED displ
 - [x] Gerbers exported from the DRC-clean board — ready for JLCPCB upload
 - [x] Firmware — ADC sampling + RMS math
 - [x] Firmware — power factor calculation
-- [ ] PCB fabrication (JLCPCB)
+- [x] PCB fabrication (JLCPCB)
+- [x] Board assembly + bring-up — power, ESP32, both CT channels, OLED verified
 - [x] 3D enclosure design
 - [x] WiFi dashboard
 - [x] Modbus TCP/IP server (8 holding registers, Function Code 3)
+- [ ] CT jacks (J1/J2) fitted + ZMPT101B connected
+- [ ] Calibration against a multimeter (ICAL / VCAL)
 - [ ] Full system test
 
 ---
