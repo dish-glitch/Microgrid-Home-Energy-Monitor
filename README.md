@@ -149,6 +149,10 @@ The assembled board running the real firmware (still in `SIMULATION 1` mode unti
 
 ![OLED showing live readings on the assembled board](docs/photos/assembly/oled-live-readings.jpg)
 
+![Assembled board, top view — ESP32, MCP6002 front end with the pin 5 bodge wire, power and status LEDs lit](docs/photos/assembly/board-top.jpg)
+
+![Assembled board with the OLED running the firmware](docs/photos/assembly/oled-angle.jpg)
+
 | First power-up | 5V bench supply, constant-voltage mode |
 |---|---|
 | ![Board powered with the red power LED lit](docs/photos/assembly/first-power-up.jpg) | ![Bench supply at 5.00V, 0.114A](docs/photos/assembly/bench-supply-5v.jpg) |
@@ -158,6 +162,10 @@ The assembled board running the real firmware (still in `SIMULATION 1` mode unti
 ![I2C scan finds the OLED at 0x3C](docs/photos/assembly/serial-i2c-scan.png)
 
 ![CT1 and CT2 both reading about 1680 mV](docs/photos/assembly/serial-ct-bias.png)
+
+Firmware serial output — readings every loop, kWh accumulating:
+
+![Energy monitor firmware serial output](docs/photos/assembly/serial-firmware-readings.jpg)
 
 ESP32 boot log over the J5 programming header:
 
