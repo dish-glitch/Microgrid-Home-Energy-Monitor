@@ -163,6 +163,27 @@ The assembled board running the real firmware (still in `SIMULATION 1` mode unti
 
 ![CT1 and CT2 both reading about 1680 mV](docs/photos/assembly/serial-ct-bias.png)
 
+WiFi dashboard served by the ESP32 (port 80), viewed in a laptop browser on the same network:
+
+<img src="docs/photos/assembly/web-dashboard.png" alt="Home Energy Monitor web dashboard" width="420">
+
+Modbus TCP read from a laptop using [`tools/modbus_read.py`](tools/modbus_read.py) (Function Code 3, holding registers 40001–40008):
+
+```
+Raw registers: (1200, 500, 550, 600, 92, 0, 300, 360)
+----------------------------------
+Voltage:         120.0 V
+Current CH1:     5.00 A
+Real Power CH1:  550 W
+Apparent CH1:    600 VA
+Power Factor:    0.92
+Total Energy:    0.0 kWh
+Current CH2:     3.00 A
+Real Power CH2:  360 W
+```
+
+*(Total energy is stored ×10, so it reads 0.0 until the running total passes 0.1 kWh.)*
+
 Firmware serial output — readings every loop, kWh accumulating:
 
 ![Energy monitor firmware serial output](docs/photos/assembly/serial-firmware-readings.jpg)
