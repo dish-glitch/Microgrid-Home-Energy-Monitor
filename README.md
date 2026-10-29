@@ -163,6 +163,10 @@ The assembled board running the real firmware (still in `SIMULATION 1` mode unti
 
 ![CT1 and CT2 both reading about 1680 mV](docs/photos/assembly/serial-ct-bias.png)
 
+WiFi dashboard served by the ESP32 (port 80), viewed in a laptop browser on the same network:
+
+<img src="docs/photos/assembly/web-dashboard.png" alt="Home Energy Monitor web dashboard" width="420">
+
 Firmware serial output — readings every loop, kWh accumulating:
 
 ![Energy monitor firmware serial output](docs/photos/assembly/serial-firmware-readings.jpg)
