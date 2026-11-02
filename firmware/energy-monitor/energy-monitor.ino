@@ -124,6 +124,8 @@ void setup() {
   pinMode(PIN_LED, OUTPUT);
   digitalWrite(PIN_LED, HIGH);
 
+  analogReadResolution(10); // EmonLib assumes a 10-bit ADC on non-ARM chips, ESP32 defaults to 12-bit (readings would be 4x too high)
+
   ct1.voltage(PIN_VOLTAGE, VCAL, PHASE_SHIFT);
   ct1.current(PIN_CT1, ICAL);
   ct2.current(PIN_CT2, ICAL);
