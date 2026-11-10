@@ -1,5 +1,6 @@
 // Bring-up test for a freshly assembled board. No sensors or extra libraries needed.
-// Blinks D2, scans I2C for the OLED, reads the BOOT button and prints the three ADC inputs.
+// Blinks D2, scans I2C for the OLED, reads the BOOT button and prints the three ADC inputs
+// (average = bias point, pk-pk = AC swing, useful when setting the ZMPT101B trimmer).
 
 #include <Wire.h>
 
@@ -8,6 +9,18 @@
 #define PIN_VOLTAGE 36
 #define PIN_LED 2
 #define PIN_BOOT 0
+
+// Peak-to-peak over ~3 mains cycles, so an AC signal (CT clamp, ZMPT101B) shows its swing
+int readPkPkMv(int pin) {
+  int lo = 4095, hi = 0;
+  unsigned long start = millis();
+  while (millis() - start < 50) {
+    int mv = analogReadMilliVolts(pin);
+    if (mv < lo) lo = mv;
+    if (mv > hi) hi = mv;
+  }
+  return hi - lo;
+}
 
 int readAvgMv(int pin) {
   long sum = 0;
@@ -41,8 +54,9 @@ void setup() {
 
 void loop() {
   digitalWrite(PIN_LED, !digitalRead(PIN_LED));
-  Serial.printf("CT1: %4d mV   CT2: %4d mV   VOLT: %4d mV   BOOT: %s\n",
-                readAvgMv(PIN_CT1), readAvgMv(PIN_CT2), readAvgMv(PIN_VOLTAGE),
+  Serial.printf("CT1: %4d mV (pk-pk %4d)   CT2: %4d mV (pk-pk %4d)   VOLT: %4d mV (pk-pk %4d)   BOOT: %s\n",
+                readAvgMv(PIN_CT1), readPkPkMv(PIN_CT1), readAvgMv(PIN_CT2), readPkPkMv(PIN_CT2),
+                readAvgMv(PIN_VOLTAGE), readPkPkMv(PIN_VOLTAGE),
                 digitalRead(PIN_BOOT) == LOW ? "PRESSED" : "released");
   delay(500);
 }

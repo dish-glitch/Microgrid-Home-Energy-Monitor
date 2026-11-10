@@ -97,6 +97,12 @@ kWh += P * (sample_interval_ms / 3600000)
 
 Give the board at least **0.5 A** of supply current — WiFi transmit bursts reach ~250 mA, and a tighter current limit browns out the ESP32.
 
+### Calibration
+
+- **Current (ICAL):** clamp one conductor of a resistive load with a known rating (rice cooker, kettle, heater) using a split 2-wire `SPT-2` extension cord — never the whole cord. Then `new ICAL = old ICAL × (expected A ÷ board A)`, where expected A = label W ÷ outlet V. The first board read 2.40 A for a 300 W rice cooker (2.50 A expected), giving `ICAL 63.1`.
+- **Voltage (VCAL):** with the ZMPT101B enclosed and plugged in, `new VCAL = old VCAL × (meter V ÷ board V)`.
+- After every reset, EmonLib's offset filter takes ~10–30 s to settle; readings start high and decay to the noise floor (~0.12 A with no load). Ignore the first lines.
+
 ### Board bring-up test
 
 [`board-test/board-test.ino`](board-test/board-test.ino) needs no sensors or extra libraries. It blinks D2, scans I2C for the OLED, reports the BOOT button and prints the three ADC inputs. On a healthy board with nothing plugged into J1/J2, **CT1 and CT2 both read ≈1650 mV** (the bias midpoint); VOLT floats until the ZMPT101B is connected.
