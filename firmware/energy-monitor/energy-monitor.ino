@@ -15,7 +15,7 @@
 #define PIN_VOLTAGE 36
 #define PIN_LED 2
 
-#define ICAL 60.6 // fine tune this when the board arrives ((turns ratio(100A)/burdan(0.05))/33(resistor) = 60.6)
+#define ICAL 63.1 // calibrated: 300W rice cooker read 2.40A, expected 2.50A at 120V (theory: (100A/0.05A)/33 = 60.6)
 #define VCAL 234.26 // fine tune this when you measure with your multimeter.
 #define PHASE_SHIFT 1.7 // timing difference
 

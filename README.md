@@ -138,7 +138,8 @@ home-energy-monitor/
 | Oct 22, 2026 | Board assembly started — SMD parts with solder paste on a mini hot plate, THT by hand |
 | Oct 23, 2026 | First power-up. Tracked a 3.3V rail "short" down to 10Ω resistors (marked `01X`) fitted where the 10kΩ bias resistors (`01C`) belong — replaced them, rail came up at 3.3V. ESP32 boots and flashes over the J5 header |
 | Oct 28, 2026 | Op-amp replaced (bench-tested on a breadboard first) and a bodge wire added for a damaged U2 pin 5 pad. Both CT channels verified at the 1.65V bias point, OLED found on I2C, full firmware running on the board |
-| — | Firmware calibrated, first real power readings |
+| Nov 10, 2026 | CT jacks fitted (plug bodies trimmed to clear the PCB). First real current measurements with `SIMULATION 0`: a 300 W rice cooker read **2.40 A** on Cook against 2.50 A expected (300 W ÷ 120 V), within 4% before calibration. ICAL tuned 60.6 → 63.1. A desk fan read ~0.2 A; the noise floor with nothing on is ~0.12 A |
+| — | ZMPT101B mains side enclosed, VCAL calibrated, real watts + power factor |
 | — | Dashboard live, full system working |
 
 ---
@@ -216,8 +217,9 @@ Simulates dual CT sensor readings, RMS power math, serial output, and OLED displ
 - [x] 3D enclosure design
 - [x] WiFi dashboard
 - [x] Modbus TCP/IP server (8 holding registers, Function Code 3)
-- [ ] CT jacks (J1/J2) fitted + ZMPT101B connected
-- [ ] Calibration against a multimeter (ICAL / VCAL)
+- [x] CT jacks (J1/J2) fitted
+- [x] Current calibration (ICAL) against a known resistive load
+- [ ] ZMPT101B mains side enclosed + voltage calibration (VCAL)
 - [ ] Full system test
 
 ---
